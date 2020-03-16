@@ -10,7 +10,7 @@ description: >-
 
 To work on this project we recommend you use the following tools 
 
-{% hint style="info" %}
+{% hint style="success" %}
 To get a listing of all the used settings and plugins please go to our GitHub :   
 [https://github.com/JensVanhulst/IOT-Dashboard/tree/master/Configs](https://github.com/JensVanhulst/IOT-Dashboard/tree/master/Configs)
 {% endhint %}
