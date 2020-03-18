@@ -1,13 +1,20 @@
+//npm install -D prettier prettier-eslint eslint-plugin-prettier eslint-config-prettier
 module.exports = {
-    env: {
-        jest: true,
-    },
-    extends: 'airbnb-base',
-    rules: {
-        'comma-dangle': 0,
-        'no-underscore-dangle': 0,
-        'no-param-reassign': 0,
-        'no-return-assign': 0,
-        camelcase: 0,
-    }
+  env: {
+    commonjs: true,
+    es6: true,
+    node: true,
+  },
+  extends: ['google', 'prettier'],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parserOptions: {
+    ecmaVersion: 2018,
+  },
+  rules: {
+    'prettier/prettier': 'error',
+  },
+  plugins: ['prettier'],
 };
