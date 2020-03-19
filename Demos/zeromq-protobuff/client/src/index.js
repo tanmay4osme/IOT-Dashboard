@@ -12,7 +12,7 @@ protobuf.load("../proto/log.proto", (err, root) => {
   const type = root.lookupType("Loggings.Log");
   let j = 1;
 
-  for (j = 1; j <= 1000; j++) {
+  for (j = 1; j <= 10; j++) {
     let random = Math.floor(Math.random() * Math.floor(50));
     let payload = { temperature: random };
     const errorMessage = type.verify(payload);

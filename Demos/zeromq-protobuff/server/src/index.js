@@ -11,7 +11,7 @@ influx
     }
   })
   .then(() => {
-    sock.connect(`tcp://127.0.0.1:${SOCK_PORT}`);
+    sock.connect(`tcp://0.0.0.0:${SOCK_PORT}`);
     console.log(`Worker running on : http://localhost:${SOCK_PORT}`);
   })
   .catch((err) => {
