@@ -23,3 +23,14 @@ To get a listing of all the used settings and plugins please go to our GitHub :
 | Figma | [https://www.figma.com/](https://www.figma.com/files/recent) |
 | Docker | [https://www.docker.com/](https://www.docker.com/) |
 
+### Database
+
+| Database | Link |
+| :--- | :--- |
+|  | [https://www.mysql.com/](https://www.mysql.com/) |
+| MongoDB | [https://www.mongodb.com](https://www.mongodb.com) |
+| InfluxDB | [https://www.influxdata.com/](https://www.influxdata.com/) |
+| Cassandra | [http://cassandra.apache.org/](http://cassandra.apache.org/) |
+
+
+
