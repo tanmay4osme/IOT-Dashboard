@@ -2,8 +2,9 @@ const zmq = require("zeromq");
 const sock = zmq.socket("push");
 const protobuf = require("protobufjs");
 
-sock.bindSync("tcp://127.0.0.1:5001");
-console.log("Producer bound to port 5001");
+sock.bindSync("tcp://127.0.0.1:5000");
+
+console.log("Producer bound to port 5000");
 
 protobuf.load("../proto/log.proto", (err, root) => {
   if (err) throw err;

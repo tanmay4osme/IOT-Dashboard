@@ -2,7 +2,7 @@
 const zmq = require('zeromq');
 const sock = zmq.socket('pull');
 const protobuf = require('protobufjs');
-const influx = require('../database/db');
+const influx = require('./database/db');
 
 const express = require('express');
 const morgan = require('morgan');

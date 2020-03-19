@@ -1,7 +1,7 @@
 const { app, influx, sock, protobuf } = require('./app');
 
-const port = process.env.EXPRESS_PORT || 5000;
-const zport = process.env.ZEROMQ_PORT || 5001;
+const SOCK_PORT = process.env.SOCKET_PORT || 5000;
+const API_PORT = process.env.API_PORT || 5001;
 
 influx
   .getDatabaseNames()
@@ -11,8 +11,8 @@ influx
     }
   })
   .then(() => {
-    sock.connect('tcp://127.0.0.1:' + zport);
-    console.log(`Worker running on : http://localhost:${zport}`);
+    sock.connect(`tcp://127.0.0.1:${SOCK_PORT}`);
+    console.log(`Worker running on : http://localhost:${SOCK_PORT}`);
   })
   .catch((err) => {
     console.log(`Error creating influx database - ${err}`);
@@ -44,8 +44,8 @@ sock.on('message', (msg) => {
   });
 });
 
-app.listen(port, () => {
+app.listen(API_PORT, () => {
   /* eslint-disable no-console */
-  console.log(`API Listening on : http://localhost:${port}`);
+  console.log(`API Listening on : http://localhost:${API_PORT}`);
   /* eslint-enable no-console */
 });
