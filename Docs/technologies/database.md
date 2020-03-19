@@ -1,7 +1,7 @@
 # Database
 
 {% hint style="danger" %}
-Databases not ready for production
+Databases are in test phase
 {% endhint %}
 
 | Database | Link |
