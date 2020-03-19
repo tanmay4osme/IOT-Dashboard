@@ -1,7 +1,7 @@
 const Influx = require('influx');
 
 const influx = new Influx.InfluxDB({
-  host: process.env.NODE_ENV === 'production' ? 'db' : 'localhost',
+  host: 'db',
   database: 'logs',
   port: process.env.DB_PORT,
   schema: [
