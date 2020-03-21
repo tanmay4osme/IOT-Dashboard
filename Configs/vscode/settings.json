@@ -1,0 +1,13 @@
+{
+  "editor.formatOnSave": true,
+  "explorer.openEditors.visible": 0,
+  "editor.snippetSuggestions": "top",
+  "emmet.showAbbreviationSuggestions": false,
+  "editor.fontSize": 14,
+  "editor.tabSize": 2,
+  "editor.lineHeight": 0,
+  "editor.minimap.enabled": false,
+  "eslint.enable": true,
+  "eslint.validate": ["vue", "html", "javascript", "markdown"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
