@@ -11,8 +11,10 @@ client.on("connect", () => {
         const type = root.lookupType("Loggings.Log");
         let j = 1;
         //Math.floor(Math.random() * Math.floor(50))
-        for (j = 1; j <= 1; j++) {
-          let payload = type.encode({ temperature: 20 }).finish();
+        for (j = 1; j <= 10; j++) {
+          let payload = type
+            .encode({ temperature: Math.floor(Math.random() * Math.floor(50)) })
+            .finish();
 
           // Encode a message to an Uint8Array (browser) or Buffer (node)
           client.publish("logging", payload);

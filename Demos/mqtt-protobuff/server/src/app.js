@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
 const path = require("path");
+const influx = require("./database/index.js");
 
 require("dotenv").config();
 
@@ -17,6 +18,20 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, "public")));
 
+influx
+  .getDatabaseNames()
+  .then(names => {
+    if (!names.includes("logs")) {
+      return influx.createDatabase("logs");
+    }
+  })
+  .then(() => {
+    console.log(`Database exists`);
+  })
+  .catch(err => {
+    console.log(`Error creating influx database - ${err}`);
+  });
+
 app.use("/api/v1", api);
 
 app.get("*", (req, res) => {
@@ -26,4 +41,7 @@ app.get("*", (req, res) => {
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 
-module.exports = app;
+module.exports = {
+  app,
+  influx
+};

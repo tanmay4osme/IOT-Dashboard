@@ -1,6 +1,7 @@
 const aedes = require("aedes")();
 const server = require("net").createServer(aedes.handle);
 var protobuf = require("protobufjs");
+const { influx } = require("./app");
 
 aedes.on("subscribe", (subscriptions, client) => {
   console.log(
@@ -59,9 +60,20 @@ aedes.on("publish", (packet, client, message) => {
       //print full object : eg Log { temperature: 20 }
       const message = type.decode(packet.payload);
       console.log(message);
-
       // print only the value
       console.log(message.temperature);
+
+      influx
+        .writePoints([
+          {
+            measurement: "temperatures",
+            fields: { temperature: message.temperature },
+            tags: { host: "localhost" }
+          }
+        ])
+        .catch(err => {
+          console.error(`Error saving data to InfluxDB! ${err.stack}`);
+        });
     });
   }
 

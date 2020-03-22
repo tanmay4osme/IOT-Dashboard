@@ -1,4 +1,4 @@
-const app = require("./app");
+const { app } = require("./app");
 const broker = require("./broker");
 
 const PORT = process.env.PORT || 5000;
@@ -11,5 +11,5 @@ app.listen(PORT, () => {
 });
 
 broker.listen(BROKER_PORT, () => {
-  console.log("Aedes listening on port:", BROKER_PORT);
+  console.log(`Broker listening on port: ${BROKER_PORT}`);
 });
