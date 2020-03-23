@@ -9,12 +9,12 @@ import vuetify from './plugins/vuetify';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 //1 ADD NEW ICON HERE
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCamera, faHistory, faFlagCheckered, faChartArea, faSave, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 //2 ADD NEW ICON IN THS LINE
-library.add(faHome);
+library.add(faHome, faCamera, faHistory, faFlagCheckered, faChartArea, faSave, faExclamationCircle );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

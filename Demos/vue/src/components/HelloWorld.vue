@@ -21,7 +21,6 @@
 
   h1 {
     color: $color-primary-text !important;
-  
   }
 </style>
 
