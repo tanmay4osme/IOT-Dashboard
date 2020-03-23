@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package Loggings;
+message Log {
+  uint32 value = 1;
+  string type = 2;
+}
