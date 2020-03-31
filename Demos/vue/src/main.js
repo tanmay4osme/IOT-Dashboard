@@ -3,7 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
-
+import VueApexCharts from "vue-apexcharts";
 
 //https://fontawesome.com/icons
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(faHome, faCamera, faHistory, faFlagCheckered, faChartArea, faSave, faExclamationCircle );
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('apexchart', VueApexCharts);
 
 Vue.config.productionTip = false
 

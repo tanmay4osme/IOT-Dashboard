@@ -1,7 +1,7 @@
 <template>
 <v-app>
   <navigation />
-  <v-content>
+  <v-content class="bg-grey">
     <router-view />
   </v-content>
   </v-app>
@@ -28,5 +28,9 @@ export default {
   body 
   {
     background-color: #5B5B5B !important;
+  }
+
+  .bg-grey {
+    background-color: rgb(230, 230, 230) !important;
   }
 </style>
