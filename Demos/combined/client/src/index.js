@@ -11,7 +11,7 @@ client.on("connect", () => {
         const type = root.lookupType("Loggings.Log");
         let j = 1;
         //Math.floor(Math.random() * Math.floor(50))
-        for (j = 1; j <= 10; j++) {
+        for (j = 1; j <= 100; j++) {
           let payload = type
             .encode({ temperature: Math.floor(Math.random() * Math.floor(50)) })
             .finish();
@@ -24,19 +24,5 @@ client.on("connect", () => {
         console.log(`Done`);
       });
     }
-  });
-});
-
-client.on("message", (topic, message) => {
-  protobuf.load("../proto/entry.proto", (err, root) => {
-    if (err) throw err;
-    const type = root.lookupType("Loggings.Log");
-
-    var errMsg = type.verify(message);
-    if (errMsg) {
-      throw Error(errMsg);
-    }
-    const m = type.decode(message);
-    console.log(`Received Message = ${m.temperature} on topic ${topic}`);
   });
 });

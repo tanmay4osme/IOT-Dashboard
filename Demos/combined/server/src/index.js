@@ -1,5 +1,5 @@
-const { app } = require("./app");
-const broker = require("./broker");
+const { app } = require('./app');
+const broker = require('./broker');
 
 const PORT = process.env.PORT || 5000;
 const BROKER_PORT = process.env.BROKER_PORT || 5001;
@@ -11,5 +11,6 @@ app.listen(PORT, () => {
 });
 
 broker.listen(BROKER_PORT, () => {
+  /* eslint-disable no-console */
   console.log(`Broker listening on port: ${BROKER_PORT}`);
 });
