@@ -166,7 +166,5 @@ $ npm start
 {% endtab %}
 {% endtabs %}
 
-#### 
-
 
 
