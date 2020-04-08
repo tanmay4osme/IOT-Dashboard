@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "lint": "eslint --fix src",
-    "test": "mocha --exit"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "CJ R. <cj@null.computer> (https://w3cj.now.sh)",
@@ -28,11 +26,6 @@
     "websocket-stream": "^5.5.2"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.1",
-    "mocha": "^7.1.1",
-    "nodemon": "^2.0.2",
-    "supertest": "^4.0.2"
+    "nodemon": "^2.0.2"
   }
 }
