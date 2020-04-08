@@ -1,9 +1,9 @@
 const mqtt = require("mqtt");
-const client = mqtt.connect("mqtt://localhost:3001");
+const client = mqtt.connect("mqtt://193.190.154.184:24071");
 var protobuf = require("protobufjs");
 
 client.on("connect", () => {
-  client.subscribe("logging", err => {
+  client.subscribe("logging", (err) => {
     if (!err) {
       protobuf.load("../proto/entry.proto", (err, root) => {
         if (err) throw err;

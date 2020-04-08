@@ -64,9 +64,9 @@ aedes.on('publish', (packet, client, message) => {
         .writePoints([
           {
             measurement: 'temperatures',
-            fields: { temperature: message.temperature },
-            tags: { host: 'localhost' }
-          }
+            fields: { temperature: m.temperature },
+            tags: { host: 'localhost' },
+          },
         ])
         .catch((error) => {
           console.error(`Error saving data to InfluxDB! ${err.stack}`);
