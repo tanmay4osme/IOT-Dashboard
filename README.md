@@ -6,7 +6,7 @@
 
 <p align="center">
    <a href="https://opensource.org/licenses/MIT">
-    <img alt="GitHub" src="https://img.shields.io/github/license/JensVanhulst/IOT-Dashboard?style=for-the-badge.svg" alt="License">
+    <img alt="GitHub" src="https://img.shields.io/github/license/JensVanhulst/IOT-Dashboard?style=for-the-badge">
   </a>
 
   <a href="https://github.com/JensVanhulst/IOT-Dashboard/network/dependencies">
