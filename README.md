@@ -5,21 +5,30 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/JensVanhulst/IOT-Dashboard/issues">
-    <img src="https://img.shields.io/github/issues-raw/JensVanhulst/IOT-Dashboard.svg" alt="GitHub open issues">
+   <a href="https://opensource.org/licenses/MIT">
+    <img alt="GitHub" src="https://img.shields.io/github/license/JensVanhulst/IOT-Dashboard?style=for-the-badge">
+  </a>
+
+  <a href="https://github.com/JensVanhulst/IOT-Dashboard/network/dependencies">
+    <img alt="Libraries.io dependency status for GitHub repo" src="https://img.shields.io/librariesio/github/JensVanhulst/IOT-Dashboard?style=for-the-badge">
   </a>
 
   <a href="https://github.com/JensVanhulst/IOT-Dashboard/releases">
-    <img src="https://img.shields.io/github/v/tag/JensVanhulst/IOT-Dashboard.svg" alt="GitHub tag (latest by date)">
+    <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/JensVanhulst/IOT-Dashboard?include_prereleases&style=for-the-badge">
+  </a>
+
+  <a href="https://github.com/JensVanhulst/IOT-Dashboard/issues">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/JensVanhulst/IOT-Dashboard?style=for-the-badge">
   </a>
 
   <a href="https://github.com/JensVanhulst/IOT-Dashboard/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/JensVanhulst/IOT-Dashboard.svg" alt="GitHub contributors">
+    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/JensVanhulst/IOT-Dashboard?style=for-the-badge" alt="Contributions">
   </a>
 
-  <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
+  <a href="#">
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/JensVanhulst/IOT-Dashboard?style=for-the-badge" alt="Language">
   </a>
+
 </p>
 
 ---
