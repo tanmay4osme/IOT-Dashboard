@@ -18,6 +18,21 @@
   </a>
 </p>
 
-# Documentation
+## Documentation
 
-https://vanhulstjens.gitbook.io/iot-dashboard/
+To check out the docs, visit [Documentation](https://vanhulstjens.gitbook.io/iot-dashboard/).
+
+## Questions
+
+For questions and support please use the email address: jens.vanhulst@student.pxl.be.
+The issue list of this repo is **exclusively** for bug reports and feature requests.
+
+## Issues
+
+Please make sure to read the [Issue Reporting Checklist]() before opening an issue. Issues not conforming to the guidelines may be closed immediately.
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2020 Jens Vanhulst
