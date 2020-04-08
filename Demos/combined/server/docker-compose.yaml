@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   server:
     build: .
@@ -7,10 +7,10 @@ services:
       - .:/usr/app/
       - /usr/app/node_modules
     ports:
-      - "3000:3000"
-      - "3001:3001"
+      - '80:3000'
+      - '3001:3001'
     depends_on:
-      - "db"
+      - 'db'
     links:
       - db
     environment:
@@ -22,4 +22,4 @@ services:
     volumes:
       - ./data:/data/db
     ports:
-      - "8086:8086"
+      - '8086:8086'
