@@ -5,24 +5,24 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/JensVanhulst/IOT-Dashboard/issues">
-    <img src="https://img.shields.io/github/issues-raw/JensVanhulst/IOT-Dashboard.svg" alt="GitHub open issues">
-  </a>
-
-  <a href="https://github.com/JensVanhulst/IOT-Dashboard/releases">
-    <img alt="GitHub release (latest SemVer including pre-releases)" src="https://img.shields.io/github/v/release/JensVanhulst/IOT-Dashboard?include_prereleases" alt="Releases">
-  </a>
-
-  <a href="https://github.com/JensVanhulst/IOT-Dashboard/graphs/contributors">
-    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/JensVanhulst/IOT-Dashboard?style=for-the-badge" alt="Contributions">
-  </a>
-
-  <a href="https://opensource.org/licenses/MIT">
+   <a href="https://opensource.org/licenses/MIT">
     <img alt="GitHub" src="https://img.shields.io/github/license/JensVanhulst/IOT-Dashboard?style=for-the-badge.svg" alt="License">
   </a>
 
   <a href="https://github.com/JensVanhulst/IOT-Dashboard/network/dependencies">
-    <img alt="Libraries.io dependency status for GitHub repo" src="https://img.shields.io/librariesio/github/JensVanhulst/IOT-Dashboard?style=for-the-badge.svg" alt="dependensies">
+    <img alt="Libraries.io dependency status for GitHub repo" src="https://img.shields.io/librariesio/github/JensVanhulst/IOT-Dashboard?style=for-the-badge">
+  </a>
+
+  <a href="https://github.com/JensVanhulst/IOT-Dashboard/releases">
+    <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/JensVanhulst/IOT-Dashboard?include_prereleases&style=for-the-badge">
+  </a>
+
+  <a href="https://github.com/JensVanhulst/IOT-Dashboard/issues">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/JensVanhulst/IOT-Dashboard?style=for-the-badge">
+  </a>
+
+  <a href="https://github.com/JensVanhulst/IOT-Dashboard/graphs/contributors">
+    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/JensVanhulst/IOT-Dashboard?style=for-the-badge" alt="Contributions">
   </a>
 
   <a href="#">
