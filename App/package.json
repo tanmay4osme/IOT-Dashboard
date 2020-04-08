@@ -1,13 +1,11 @@
 {
-  "name": "iot-dashboard",
+  "name": "iot-dashboard-server",
   "version": "1.0.0",
   "description": "A IoT-Dashboard for managing a production process",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
+  "main": "src/index.js",
+  "scripts": {},
+  "author": "Jens Vanhulst",
+  "license": "MIT",
   "devDependencies": {
     "nodemon": "^2.0.3"
   },
