@@ -10,7 +10,11 @@
   </a>
 
   <a href="https://github.com/JensVanhulst/IOT-Dashboard/network/dependencies">
-    <img alt="Libraries.io dependency status for GitHub repo" src="https://img.shields.io/librariesio/github/JensVanhulst/IOT-Dashboard?style=for-the-badge">
+    <img alt="David (path)" src="https://img.shields.io/david/JensVanhulst/IOT-Dashboard?label=Website%20dependencies&path=App%2Fwebsite&style=for-the-badge">
+  </a>
+
+  <a href="https://github.com/JensVanhulst/IOT-Dashboard/network/dependencies">
+    <img alt="David (path)" src="https://img.shields.io/david/JensVanhulst/IOT-Dashboard?label=Server%20dependencies&path=App&style=for-the-badge">
   </a>
 
   <a href="https://github.com/JensVanhulst/IOT-Dashboard/releases">
