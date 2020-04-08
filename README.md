@@ -50,6 +50,8 @@ One Paragraph of project description goes here
     - [Setup](#setup)
     - [To run development server (client)](#to-run-development-server-client)
     - [To run development server (server)](#to-run-development-server-server)
+    - [Build application (client)](#build-application-client)
+    - [Build application (server)](#build-application-server)
   - [Installation for production](#installation-for-production)
   - [Features](#features)
   - [Documentation](#documentation)
@@ -87,11 +89,20 @@ $ npm install
 
 ### To run development server (client)
 
+> If you want to develop on web version run the commands below
 > This will start a local development server on `http://localhost:8080`
 
 ```shell
 $ cd IOT-Dashboard/App/client
 $ npm run serve
+```
+
+> If you want to develop for electron app run commands below
+> This will open an electron window with hot reloading
+
+```shell
+$ cd IOT-Dashboard/App/client
+$ npm run electron:serve
 ```
 
 ### To run development server (server)
@@ -103,10 +114,58 @@ $ cd IOT-Dashboard/App/server
 $ npm start
 ```
 
+### Build application (client)
+
+> If you want to build for electron app make sure you are in the App folder and run :
+> This will open an electron window with hot reloading
+
+```shell
+$ npm run electron:build
+```
+
+> If you want to build the web version run :
+> This will create a `dist` folder that you need to transfer the content to the `public` folder.
+
+```shell
+$ npm run build
+```
+
+### Build application (server)
+
+Make a directory on the server ...
+
+1. Make sure the following software is installed on the server
+   - Node LTS
+   - Docker & docker-compose
+2. Run the following commands
+
+```shell
+$ docker-compose build
+```
+
+> To spin up the server instance run:
+
+```shell
+$ docker-compose up
+```
+
+> To stop the server instance run :
+
+```shell
+$ docker-compose down
+```
+
+> To get into a docker container and get a bash shell run:
+
+```shell
+$ docker exec -it <container name> /bin/bash
+```
+
 ## Installation for production
 
 - Install the electron version
-- Go to website : `http://193.190.154.184:24070/`
+  - Go to [Releases](https://github.com/JensVanhulst/IOT-Dashboard/releases) and pick your operating system package
+- Go to website : `http://193.190.154.184:24070/` or `http://intelliflow.pxl-ea-ict.be:24070/`
 
 ## Features
 
