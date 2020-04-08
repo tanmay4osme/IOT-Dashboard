@@ -1,6 +1,0 @@
-syntax = "proto3";
-
-package Loggings;
-message Log {
-  int32 temperature = 10044555;
-}
