@@ -1,3 +1,9 @@
+---
+description: >-
+  This page will guide you through the installation and setup of the tools
+  needed to work on the project.
+---
+
 # Installation & Setup
 
 ## Install tooling
@@ -49,16 +55,60 @@ You only need to install the Vue CLI when you want to create new vue apps
 ```bash
 $ npm i -g @vue/cli
 ```
+{% endtab %}
+
+{% tab title="Windows" %}
+### Install Git 
+
+{% hint style="info" %}
+If you don't want to work with the CLI you can install a GUI version from this link : [https://desktop.github.com/](https://desktop.github.com/)
+{% endhint %}
+
+1. Download git from the following link : [https://git-scm.com/download/win](https://git-scm.com/download/win)
+
+2. When you've successfully started the installer, you should see the **Git Setup** wizard screen. Follow the **Next** and **Finish** prompts to complete the installation. The default options are pretty sensible for most users.
+
+3. Open a Command Prompt \(or Git Bash if during installation you elected not to use Git from the Windows Command Prompt\).
+
+4. Run the following commands to configure your Git username and email using the following commands, replacing Emma's name with your own. These details will be associated with any commits that you create:
+
+```text
+$ git config --global user.name "a b"
+$ git config --global user.email "a@b.com"
+```
+
+### Install Node.js and NPM
+
+> Install Nodejs using the following link   
+> [https://www.guru99.com/download-install-node-js.html](https://www.guru99.com/download-install-node-js.html)
+
+### Install Docker
+
+1. Double-click **Docker Desktop Installer.exe** to run the installer.
+
+   If you haven’t already downloaded the installer \(`Docker Desktop Installer.exe`\), you can get it from [**Docker Hub**](https://hub.docker.com/editions/community/docker-ce-desktop-windows/). It typically downloads to your `Downloads` folder, or you can run it from the recent downloads bar at the bottom of your web browser.  
+
+2. Follow the instructions on the installation wizard to accept the license, authorize the installer, and proceed with the install.
+
+   When prompted, authorize the Docker Desktop Installer with your system password during the install process. Privileged access is needed to install networking components, links to the Docker apps, and manage the Hyper-V VMs.  
+
+3. Click **Finish** on the setup complete dialog and launch the Docker Desktop application.
+
+### Install Vue CLI \(optional\)
+
+{% hint style="warning" %}
+You only need to install the Vue CLI when you want to create new vue apps
+{% endhint %}
+
+```bash
+$ npm i -g @vue/cli
+```
+{% endtab %}
+{% endtabs %}
 
 {% hint style="success" %}
 You are now ready to proceed !
 {% endhint %}
-{% endtab %}
-
-{% tab title="Windows" %}
-
-{% endtab %}
-{% endtabs %}
 
 ## Clone the repository
 

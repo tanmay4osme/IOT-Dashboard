@@ -4,12 +4,23 @@
 
 ## Getting started
 
-* [IoT Dashboard](getting-started/iot-dashboard.md)
 * [Installation & Setup](getting-started/installation-and-setup.md)
 * [Build for production](getting-started/build-for-production.md)
+* [Server setup](getting-started/server-setup.md)
 
-## Technologies
+## API Reference
 
-* [Database](technologies/database.md)
-* [Communication protocols](technologies/communication-protocols.md)
+* [Endpoints](api-reference/endpoints.md)
+
+## MQTT
+
+* [Intro](mqtt/intro.md)
+
+## DATABASE
+
+* [Untitled](database/untitled.md)
+
+## Dashboard <a id="features"></a>
+
+* [Untitled](features/untitled.md)
 
