@@ -48,7 +48,7 @@ aedes.on('clientDisconnect', (client) => {
 // fired when a message is published
 aedes.on('publish', (packet, client, message) => {
   if (packet.cmd === 'publish') {
-    console.log(packet);
+    //console.log(packet);
 
     protobuf.load('./proto/entry.proto', (err, root) => {
       if (err) throw err;
@@ -56,9 +56,9 @@ aedes.on('publish', (packet, client, message) => {
 
       // print full object : eg Log { temperature: 20 }
       const m = type.decode(packet.payload);
-      console.log(m);
+      //console.log(m);
       // print only the value
-      console.log(m.temperature);
+      //console.log(m.temperature);
 
       influx
         .writePoints([
@@ -74,16 +74,16 @@ aedes.on('publish', (packet, client, message) => {
     });
   }
 
-  console.log(
-    `Client \x1b[31m${
-      client ? client.id : `BROKER_${aedes.id}`
-    }\x1b[0m has published`,
-    packet.payload.toString(),
-    'on',
-    packet.topic,
-    'to broker',
-    aedes.id
-  );
+  // console.log(
+  //   `Client \x1b[31m${
+  //     client ? client.id : `BROKER_${aedes.id}`
+  //   }\x1b[0m has published`,
+  //   packet.payload.toString(),
+  //   'on',
+  //   packet.topic,
+  //   'to broker',
+  //   aedes.id
+  // );
 });
 
 module.exports = server;
