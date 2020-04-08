@@ -1,5 +1,7 @@
 ### Installation
 
+https://favicon.io/favicon-generator/
+
 First, use the download button to download the files listed below. Place the files in the root directory of your website.
 
 - android-chrome-192x192.png
