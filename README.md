@@ -1,5 +1,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/JensVanhulst/IOT-Dashboard/issues)
+![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/JensVanhulst/IOT-Dashboard/master.svg)
+![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/JensVanhulst/IOT-Dashboard.svg)
+![GitHub contributors](https://img.shields.io/github/contributors/JensVanhulst/IOT-Dashboard.svg)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/JensVanhulst/IOT-Dashboard.svg)
 
 # Documentation
 
