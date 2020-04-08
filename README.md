@@ -22,15 +22,15 @@
   </a>
 </p>
 
+---
+
 # IOT-Dashboard
 
 One Paragraph of project description goes here
 
 ---
 
-## Table of Contents (Optional)
-
-> If your `README` has a lot of info, section headers might be nice.
+## Table of Contents
 
 - [Installation](#installation)
 - [Features](#features)
@@ -46,53 +46,61 @@ One Paragraph of project description goes here
 
 To check out the docs, visit [Documentation](https://vanhulstjens.gitbook.io/iot-dashboard/).
 
+---
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ---
 
-## Installation
-
-- All the `code` required to get started
-- Images of what it should look like
+## Installation for development
 
 ### Clone
 
-- Clone this repo to your local machine using `https://github.com/fvcproductions/SOMEREPO`
+- Clone this repo to your local machine using `https://github.com/JensVanhulst/IOT-Dashboard.git`
 
 ### Setup
 
-- If you want more syntax highlighting, format your code like this:
-
-> update and install this package first
+> Install all packages needed
 
 ```shell
-$ brew update
-$ brew install fvcproductions
-```
-
-> now install npm and bower packages
-
-```shell
+$ cd IOT-Dashboard/App/client
 $ npm install
-$ bower install
+
+$ cd IOT-Dashboard/App/server
+$ npm install
 ```
 
-- For all the possible languages that support syntax highlithing on GitHub (which is basically all of them), refer <a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml" target="_blank">here</a>.
+### To run development server (client)
+
+> This will start a local development server on `http://localhost:8080`
+
+```shell
+$ cd IOT-Dashboard/App/client
+$ npm run serve
+```
+
+### To run development server (server)
+
+> This will start a local development server on `http://localhost:5000`
+
+```shell
+$ cd IOT-Dashboard/App/server
+$ npm start
+```
+
+---
+
+## Installation for production
+
+### Via electron
+
+### Website
 
 ---
 
 ## Features
-
-## Usage (Optional)
-
-## Documentation (Optional)
-
-## Tests (Optional)
-
-- Going into more detail on code and technologies used
-- I utilized this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a> for this sample `README`.
 
 ---
 
