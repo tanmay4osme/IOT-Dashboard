@@ -10,7 +10,7 @@
   </a>
 
   <a href="https://github.com/JensVanhulst/IOT-Dashboard/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/JensVanhulst/IOT-Dashboard" alt="GitHub contributors">
+    <img src="https://img.shields.io/github/contributors/JensVanhulst/IOT-Dashboard.svg" alt="GitHub contributors">
   </a>
 
   <a href="https://opensource.org/licenses/MIT">
