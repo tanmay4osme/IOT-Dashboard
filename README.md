@@ -32,27 +32,35 @@ One Paragraph of project description goes here
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Features](#features)
-- [Contributing](#contributing)
-- [Team](#team)
-- [FAQ](#faq)
-- [Support](#support)
-- [License](#license)
-
----
-
-## Documentation
-
-To check out the docs, visit [Documentation](https://vanhulstjens.gitbook.io/iot-dashboard/).
+- [IOT-Dashboard](#iot-dashboard)
+  - [Table of Contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+  - [Installation & setup](#installation--setup)
+  - [Installation for development](#installation-for-development)
+    - [Clone](#clone)
+    - [Setup](#setup)
+    - [To run development server (client)](#to-run-development-server-client)
+    - [To run development server (server)](#to-run-development-server-server)
+  - [Installation for production](#installation-for-production)
+    - [Via electron](#via-electron)
+    - [Website](#website)
+  - [Features](#features)
+  - [Documentation](#documentation)
+  - [Versioning](#versioning)
+  - [People](#people)
+  - [Questions](#questions)
+  - [Issues](#issues)
+  - [License](#license)
 
 ---
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+To get started follow the instructions below to install the code or install a release version
 
 ---
+
+## Installation & setup
 
 ## Installation for development
 
@@ -101,6 +109,12 @@ $ npm start
 ---
 
 ## Features
+
+---
+
+## Documentation
+
+To check out the docs, visit [Documentation](https://vanhulstjens.gitbook.io/iot-dashboard/).
 
 ---
 
