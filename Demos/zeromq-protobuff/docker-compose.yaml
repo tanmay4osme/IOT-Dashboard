@@ -1,0 +1,38 @@
+version: "3"
+services:
+  api:
+    image: zeromq-proto-api
+    build: ./server
+    restart: always
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - "db"
+    links:
+      - db
+    environment:
+      WAIT_HOSTS: db:8086
+    networks:
+      - app-network
+
+  db:
+    container_name: influxdb
+    image: influxdb:latest
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "8086:8086"
+    networks:
+      - app-network
+
+volumes:
+  mongo_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
