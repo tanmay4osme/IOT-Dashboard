@@ -1,0 +1,11 @@
+{
+  "name": "iot-dashboard",
+  "version": "1.0.0",
+  "description": "A IoT-Dashboard for managing a production process",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
