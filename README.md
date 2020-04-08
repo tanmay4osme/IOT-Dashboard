@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/JensVanhulst/IOT-Dashboard" target="_blank" rel="noopener noreferrer">
-    <img width="100" src="/App/favicons/android-chrome-512x512.png" alt="Vue logo">
+    <img width="100" src="/App/website/public/android-chrome-512x512.png" alt="Vue logo">
   </a>
 </p>
 
@@ -93,8 +93,6 @@ $ npm run serve
 $ cd IOT-Dashboard/App/server
 $ npm start
 ```
-
----
 
 ## Installation for production
 
