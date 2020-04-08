@@ -8,6 +8,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/repo-size/JensVanhulst/IOT-Dashboard)
 ![GitHub contributors](https://img.shields.io/github/contributors/JensVanhulst/IOT-Dashboard)
 ![GitHub open issues](https://img.shields.io/github/issues-raw/JensVanhulst/IOT-Dashboard)
+![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github.com/JensVanhulst/IOT-Dashboard/tree/master/App)
 
 # Documentation
 
