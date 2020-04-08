@@ -42,8 +42,6 @@ One Paragraph of project description goes here
     - [To run development server (client)](#to-run-development-server-client)
     - [To run development server (server)](#to-run-development-server-server)
   - [Installation for production](#installation-for-production)
-    - [Via electron](#via-electron)
-    - [Website](#website)
   - [Features](#features)
   - [Documentation](#documentation)
   - [Versioning](#versioning)
@@ -56,9 +54,7 @@ One Paragraph of project description goes here
 
 ## Getting Started
 
-To get started follow the instructions below to install the code or install a release version
-
----
+To get started follow the instructions below to install the code or install a release version.
 
 ## Installation & setup
 
@@ -102,21 +98,14 @@ $ npm start
 
 ## Installation for production
 
-### Via electron
-
-### Website
-
----
+- Install the electron version
+- Go to website : `http://193.190.154.184:24070/`
 
 ## Features
-
----
 
 ## Documentation
 
 To check out the docs, visit [Documentation](https://vanhulstjens.gitbook.io/iot-dashboard/).
-
----
 
 ## Versioning
 
