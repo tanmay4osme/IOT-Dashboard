@@ -1,0 +1,34 @@
+{
+  "name": "IOT-Dashboard",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">   <a href=\"https://github.com/JensVanhulst/IOT-Dashboard\" target=\"_blank\" rel=\"noopener noreferrer\">     <img width=\"100\" src=\"/App/website/public/android-chrome-512x512.png\" alt=\"Vue logo\">   </a> </p>",
+  "main": "index.js",
+  "dependencies": {
+    "apexcharts": "^3.18.1",
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "e": "0.0.4",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "mongoose": "^5.9.7",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JensVanhulst/IOT-Dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JensVanhulst/IOT-Dashboard/issues"
+  },
+  "homepage": "https://github.com/JensVanhulst/IOT-Dashboard#readme"
+}
