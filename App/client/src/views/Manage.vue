@@ -144,7 +144,6 @@ export default {
           .save()
           .then((u) => {
             console.log(u);
-            this.$router.push('/login');
           })
           .catch((e) => {
             console.error(e);
