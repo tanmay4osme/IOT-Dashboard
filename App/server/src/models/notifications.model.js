@@ -1,17 +1,15 @@
-// users-model.js - A mongoose model
+// notifications-model.js - A mongoose model
 //
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
-  const modelName = 'users';
+  const modelName = 'notifications';
   const mongooseClient = app.get('mongooseClient');
-  const schema = new mongooseClient.Schema(
+  const { Schema } = mongooseClient;
+  const schema = new Schema(
     {
-      username: { type: String, unique: true, required: true },
-      password: { type: String, required: true },
-      displayName: { type: String, unique: true, required: true },
-      imageUrl: { type: String, required: true },
-      role: { type: String, required: true, default: 'Member' },
+      text: { type: String, required: true },
+      type: { type: String, required: true },
     },
     {
       timestamps: true,

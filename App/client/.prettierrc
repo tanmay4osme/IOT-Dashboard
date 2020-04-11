@@ -1,5 +1,8 @@
 {
   "singleQuote": true,
   "trailingComma": "all",
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "htmlWhitespaceSensitivity": "ignore",
+  "proseWrap": "never",
+  "printWidth": 200
 }

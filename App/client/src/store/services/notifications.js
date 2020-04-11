@@ -2,26 +2,23 @@
 /*eslint-disable */
 import feathersClient, { makeServicePlugin, BaseModel } from '../../feathers-client';
 
-class User extends BaseModel {
+class Notification extends BaseModel {
   constructor(data, options) {
     super(data, options);
   }
   // Required for $FeathersVuex plugin to work after production transpile.
-  static modelName = 'User';
+  static modelName = 'Notification';
   // Define default properties here
   static instanceDefaults() {
     return {
-      username: '',
-      password: '',
-      displayName: '',
-      imageUrl: '',
-      role: 'Member',
+      text: '',
+      type: '',
     };
   }
 }
-const servicePath = 'users';
+const servicePath = 'notifications';
 const servicePlugin = makeServicePlugin({
-  Model: User,
+  Model: Notification,
   service: feathersClient.service(servicePath),
   servicePath,
 });
