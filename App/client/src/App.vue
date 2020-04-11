@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary" dark :clipped-left="true">
       <div v-if="user" class="d-flex align-center">
         <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>-->
         <h3>{{ $route.name }}</h3>
@@ -18,7 +18,7 @@
       </div>
     </v-app-bar>
 
-    <v-navigation-drawer v-if="user" dark app expand-on-hover mini-variant>
+    <v-navigation-drawer v-if="user" app overflow dark expand-on-hover mini-variant :clipped="true">
       <v-list dense nav class="py-0">
         <v-list-item two-line class="px-0">
           <v-list-item-avatar>
@@ -44,7 +44,19 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
     <v-content>
+      <v-container v-if="user">
+        <v-row justify="center">
+          <v-col cols="10">
+            <FeathersVuexFind service="notifications" :query="{}">
+              <div slot-scope="props">
+                <v-alert dense border="left" :type="item.type" v-for="item in props.items" :key="item.id">{{ item.text }}</v-alert>
+              </div>
+            </FeathersVuexFind>
+          </v-col>
+        </v-row>
+      </v-container>
       <router-view />
     </v-content>
     <v-footer fixed app inset>

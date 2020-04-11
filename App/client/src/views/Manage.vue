@@ -83,17 +83,14 @@
         <v-row class="my-10" align="center" justify="center">
           <v-col cols="10">
             <h1 class="mb-5">Notifications</h1>
-            <div class="my-2">
-              <v-btn class="mx-1" @click="false" depressed large color="success">New notification</v-btn>
-              <v-btn class="mx-1" @click="false" depressed large color="error">Delete notification</v-btn>
-            </div>
+            <createNotificationForm />
           </v-col>
         </v-row>
         <v-row align="center" justify="center">
           <v-col cols="10">
             <FeathersVuexFind service="notifications" :query="{}">
               <div slot-scope="props">
-                <v-data-table :items="props.items" class="elevation-1" />
+                <v-data-table :headers="notificationTable.headers" :items="props.items" class="elevation-1" />
               </div>
             </FeathersVuexFind>
           </v-col>
@@ -151,12 +148,15 @@
 import { mapState } from 'vuex';
 import { notEmptyRules } from '@/validators';
 import { FeathersVuexFind } from 'feathers-vuex';
-import { logTable, userTable } from '../utils';
+import { logTable, userTable, notificationTable } from '../utils';
+
+import createNotificationForm from '../components/createNotificationForm';
 
 export default {
   name: 'Manage',
   components: {
     FeathersVuexFind,
+    createNotificationForm,
   },
 
   data: (vm) => ({
@@ -184,6 +184,7 @@ export default {
     // Settings for the tables
     logTable,
     userTable,
+    notificationTable,
 
     // Snackbar error or success
     snackbar: {

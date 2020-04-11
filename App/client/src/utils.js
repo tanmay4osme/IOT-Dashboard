@@ -23,3 +23,12 @@ export const logTable = {
     { text: 'Date', value: 'createdAt' },
   ],
 };
+
+export const notificationTable = {
+  headers: [
+    { text: 'UID', value: '_id', sortable: false },
+    { text: 'Text', value: 'text', sortable: false },
+    { text: 'Type', value: 'type', sortable: false },
+    { text: 'Date', value: 'createdAt', sortable: false },
+  ],
+};
