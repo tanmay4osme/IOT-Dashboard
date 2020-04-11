@@ -1,0 +1,24 @@
+GET http://localhost:3000/products
+
+###
+
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+	"name": "char",
+    "price": "16"
+}
+
+###
+
+// TODO: debug
+PATCH http://localhost:3000/products/id_number
+
+[
+	{"propName": "price", "value": "13"}	
+]
+
+###
+
+DELETE  http://localhost:3000/products/id_number

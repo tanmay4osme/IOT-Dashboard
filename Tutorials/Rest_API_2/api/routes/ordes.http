@@ -1,0 +1,16 @@
+GET http://localhost:3000/orders
+
+###
+
+// TODO: debug
+POST http://localhost:3000/orders
+Content-Type: application/json
+
+{
+	"productId": "5e8fab898c78a224ec7e2408"
+}
+
+###
+
+//TODO: testing
+DELETE  http://localhost:3000/orders/id_number
