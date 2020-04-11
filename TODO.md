@@ -9,7 +9,7 @@
 
 ### Frontend
 
-- [ ] Option to remove a user
+- [x] Option to remove a user
 - [ ] Bring changes from demo into develop
 
 ### Database
