@@ -1,9 +1,7 @@
 <template>
   <v-slide-y-transition mode="out-in">
     <v-container fluid v-if="currentUser.user.role === 'Administrator'">
-      <v-snackbar absolute v-model="snackbar.show" :color="snackbar.color" :timeout="snackbar.timeout" right top>
-        {{ snackbar.text }}
-      </v-snackbar>
+      <v-snackbar absolute v-model="snackbar.show" :color="snackbar.color" :timeout="snackbar.timeout" right top>{{ snackbar.text }}</v-snackbar>
 
       <!-- User operations -->
       <section id="user-actions">
@@ -12,34 +10,26 @@
             <h1 class="mb-5">User management</h1>
 
             <div class="my-2">
-              <v-btn class="mx-1" @click="dialog = !dialog" depressed large color="success">
-                Add new user
-              </v-btn>
-              <v-btn class="mx-1" @click="removeUserDialog = !removeUserDialog" depressed large color="error">
-                Delete a user
-              </v-btn>
+              <v-btn class="mx-1" @click="dialog = !dialog" depressed large color="success">Add new user</v-btn>
+              <v-btn class="mx-1" @click="removeUserDialog = !removeUserDialog" depressed large color="error">Delete a user</v-btn>
             </div>
 
             <!-- Create a new user -->
             <v-row justify="center">
-              <v-dialog v-model="dialog" persistent max-width="500">
+              <v-dialog v-model="createUserDialog" persistent max-width="500">
                 <v-card>
-                  <v-card-title class="headline mb-5">Add a new user</v-card-title>
+                  <v-card-title class="headline mb-5">Create a new user</v-card-title>
                   <v-card-text>
-                    <v-form ref="signup" v-model="valid" @submit.prevent="signUp" @keydown.prevent.enter>
+                    <v-form ref="createNewUser" v-model="valid" @submit.prevent="createNewUser" @keydown.prevent.enter>
                       <v-text-field outlined v-model="user.username" :rules="notEmptyRules" label="Username" required />
                       <v-text-field outlined v-model="user.displayName" :rules="notEmptyRules" label="Display Name" required />
                       <v-text-field outlined v-model="user.password" :rules="notEmptyRules" label="Password" type="password" required />
                       <v-text-field outlined v-model="user.confirmPassword" :rules="notEmptyRules" label="Confirm Password" type="password" required />
                       <v-text-field outlined v-model="user.imageUrl" :rules="notEmptyRules" label="Profile picture URL" required />
                       <v-select outlined v-model="user.role" :items="roleItems" :rules="notEmptyRules" required label="Role selection"></v-select>
-                      <v-btn @click="dialog = false" type="submit" color="primary" :disabled="!valid">
-                        SignUp
-                      </v-btn>
+                      <v-btn @click="dialog = false" type="submit" color="primary" :disabled="!valid">Create new user</v-btn>
 
-                      <v-btn class="mx-3" @click="dialog = false" type="submit" color="error">
-                        cancel
-                      </v-btn>
+                      <v-btn class="mx-3" @click="dialog = false" type="submit" color="error">cancel</v-btn>
                     </v-form>
                   </v-card-text>
                 </v-card>
@@ -55,13 +45,9 @@
                     <v-form ref="deleteUser" v-model="valid" @submit.prevent="deleteUser" @keydown.prevent.enter>
                       <v-text-field outlined v-model="id" :rules="notEmptyRules" label="UID" required />
 
-                      <v-btn type="submit" color="success" :disabled="!valid">
-                        Delete
-                      </v-btn>
+                      <v-btn type="submit" color="success" :disabled="!valid">Delete</v-btn>
 
-                      <v-btn class="mx-3" @click="removeUserDialog = false && this.$refs.deleteUser.reset()" color="error">
-                        cancel
-                      </v-btn>
+                      <v-btn class="mx-3" @click="removeUserDialog = false && this.$refs.deleteUser.reset()" color="error">cancel</v-btn>
                     </v-form>
                   </v-card-text>
                 </v-card>
@@ -78,7 +64,14 @@
             <h1 class="mb-5">User listing</h1>
             <FeathersVuexFind service="users" :query="{}">
               <div slot-scope="props">
-                <v-data-table :headers="table.headers" :items="props.items" :items-per-page="table.displayAmount" class="elevation-1" />
+                <v-data-table
+                  :headers="userTable.headers"
+                  :items="props.items"
+                  :sort-by.sync="userTable.sortBy"
+                  :sort-desc.sync="userTable.sortDesc"
+                  :items-per-page="userTable.displayAmount"
+                  class="elevation-1"
+                />
               </div>
             </FeathersVuexFind>
           </v-col>
@@ -90,6 +83,19 @@
         <v-row class="my-10" align="center" justify="center">
           <v-col cols="10">
             <h1 class="mb-5">Notifications</h1>
+            <div class="my-2">
+              <v-btn class="mx-1" @click="false" depressed large color="success">New notification</v-btn>
+              <v-btn class="mx-1" @click="false" depressed large color="error">Delete notification</v-btn>
+            </div>
+          </v-col>
+        </v-row>
+        <v-row align="center" justify="center">
+          <v-col cols="10">
+            <FeathersVuexFind service="notifications" :query="{}">
+              <div slot-scope="props">
+                <v-data-table :items="props.items" class="elevation-1" />
+              </div>
+            </FeathersVuexFind>
           </v-col>
         </v-row>
       </section>
@@ -101,7 +107,14 @@
             <h1 class="mb-5">Logs</h1>
             <FeathersVuexFind service="activities" :query="{}">
               <div slot-scope="props">
-                <v-data-table :headers="logTable.headers" :items="props.items" :items-per-page="logTable.displayAmount" class="elevation-1" />
+                <v-data-table
+                  :headers="logTable.headers"
+                  :sort-by.sync="logTable.sortBy"
+                  :sort-desc.sync="logTable.sortDesc"
+                  :items="props.items"
+                  :items-per-page="logTable.displayAmount"
+                  class="elevation-1"
+                />
               </div>
             </FeathersVuexFind>
           </v-col>
@@ -130,12 +143,15 @@
 
 <script>
 /* eslint-disable no-unused-vars */
+/* eslint-disable */
+
 /**
  * TODO : clear form after submit
  */
 import { mapState } from 'vuex';
 import { notEmptyRules } from '@/validators';
 import { FeathersVuexFind } from 'feathers-vuex';
+import { logTable, userTable } from '../utils';
 
 export default {
   name: 'Manage',
@@ -145,38 +161,14 @@ export default {
 
   data: (vm) => ({
     valid: false,
+
+    // Remove user dialog
     removeUserDialog: false,
-    dialog: false,
-
-    roleItems: ['Administrator', 'Member'],
-
-    snackbar: {
-      show: false,
-      text: '',
-      color: 'success',
-      timeout: 6000,
-    },
-    table: {
-      displayAmount: 5,
-      headers: [
-        { text: 'UID', value: '_id', sortable: false },
-        { text: 'Username', value: 'username', sortable: false },
-        { text: 'Role', value: 'role', sortable: false },
-        { text: 'Display name', value: 'displayName', sortable: false },
-        { text: 'Profile picture URL', value: 'imageUrl', sortable: false },
-        { text: 'Created at', value: 'createdAt', sortable: false },
-      ],
-    },
-
-    logTable: {
-      displayAmount: 15,
-      headers: [
-        { text: 'Text', value: 'text', sortable: false },
-        { text: 'Date', value: 'createdAt' },
-      ],
-    },
-
     id: '',
+
+    // Create user
+    createUserDialog: false,
+    roleItems: ['Administrator', 'Member'],
     user: {
       username: '',
       password: '',
@@ -185,7 +177,21 @@ export default {
       imageUrl: '',
       role: '',
     },
+
+    //Rules for the forms
     notEmptyRules,
+
+    // Settings for the tables
+    logTable,
+    userTable,
+
+    // Snackbar error or success
+    snackbar: {
+      show: false,
+      text: '',
+      color: 'success',
+      timeout: 6000,
+    },
   }),
 
   computed: {
@@ -193,30 +199,34 @@ export default {
   },
 
   methods: {
-    signUp() {
-      if (this.valid) {
-        const { User, Activity } = this.$FeathersVuex.api;
-        const user = new User(this.user);
-        user
-          .save()
-          .then((u) => {
-            this.showSnackbar('success', `User created with username : ${u.username} !`);
-
-            // Show activity new user
-            const activity = new Activity();
-            activity.text = `${this.$store.state.auth.payload.user.username} added ${u.username} to the system`;
-            activity.save();
-          })
-          .catch((e) => {
-            this.showSnackbar('error', `${e.message}`);
-          });
-      }
+    async generateLogEntry(text) {
+      const { Activity } = this.$FeathersVuex.api;
+      const activity = new Activity();
+      activity.text = text;
+      await activity.save();
     },
 
     showSnackbar(color, text) {
       this.snackbar.color = color;
       this.snackbar.text = text;
       this.snackbar.show = true;
+    },
+
+    createNewUser() {
+      if (this.valid) {
+        const { User } = this.$FeathersVuex.api;
+        const user = new User(this.user);
+
+        user
+          .save()
+          .then((u) => {
+            this.showSnackbar('success', `User created with username : ${u.username} !`);
+            this.generateLogEntry(`${this.$store.state.auth.payload.user.username} added ${u.username} to the system`);
+          })
+          .catch((e) => {
+            this.showSnackbar('error', `${e.message}`);
+          });
+      }
     },
 
     deleteUser() {
@@ -227,8 +237,9 @@ export default {
           .then((user) => {
             user
               .remove()
-              .then(() => {
+              .then((u) => {
                 this.showSnackbar('success', `User deleted with id : ${this.id} !`);
+                this.generateLogEntry(`${this.$store.state.auth.payload.user.username} deleted ${u.username} from the system`);
                 this.$refs.deleteUser.reset();
                 this.removeUserDialog = false;
               })
@@ -246,4 +257,3 @@ export default {
   },
 };
 </script>
-<style scoped></style>
