@@ -2,11 +2,12 @@
   <v-app>
     <v-app-bar app color="primary" dark>
       <div v-if="user" class="d-flex align-center">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <h3>Menu</h3>
+        <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <h3>Menu</h3> -->
       </div>
 
       <v-spacer></v-spacer>
+
       <div v-if="!user">
         <v-btn text class="mx-2" :to="{ name: 'login' }">Login</v-btn>
         <v-btn text class="mx-2" :to="{ name: 'signup' }">Signup</v-btn>
@@ -17,42 +18,34 @@
       </div>
     </v-app-bar>
 
-    <v-navigation-drawer v-if="user" app fixed v-model="drawer" overflow absolute bottom>
-      <v-list nav>
-        <v-list-item two-line>
+    <v-navigation-drawer v-model="drawer" dark app :expand-on-hover="expandOnHover" :mini-variant="miniVariant">
+      <v-list dense nav class="py-0">
+        <v-list-item two-line :class="miniVariant && 'px-0'">
           <v-list-item-avatar>
-            <img :src="this.$store.state.auth.payload.user.imageUrl" alt="John" />
+            <img :src="this.$store.state.auth.payload.user.imageUrl" alt="user image" />
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title
-              >{{ this.$store.state.auth.payload.user.displayName }}
-            </v-list-item-title>
+            <v-list-item-title>{{ this.$store.state.auth.payload.user.displayName }}</v-list-item-title>
             <v-list-item-subtitle>Administrator</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item-group v-model="group" active-class="deep-purple--text text--accent-4">
-          <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
-          </v-list-item>
+        <v-divider></v-divider>
 
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
+        <v-list-item v-for="item in items" :key="item.title" link :to="{ path: item.link }">
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
 
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item :to="{ path: '/manage' }">
-            <v-list-item-title>Manage</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
-    <v-content> <router-view /> </v-content>
+    <v-content><router-view /></v-content>
     <v-footer fixed app inset>
       <span>&copy; 2020 Jens Vanhulst</span>
     </v-footer>
@@ -64,8 +57,19 @@ import { mapActions, mapState } from 'vuex';
 
 export default {
   data: () => ({
-    drawer: false,
+    drawer: true,
     group: null,
+    miniVariant: true,
+    expandOnHover: true,
+    items: [
+      { title: 'Dashboard', icon: 'mdi-view-dashboard', link: '/dashboard' },
+      { title: 'Camera-feed', icon: 'mdi-camera', link: '/dashboard' },
+      { title: 'History', icon: 'mdi-camera', link: '/dashboard' },
+      { title: 'Logs', icon: 'mdi-camera', link: '/dashboard' },
+      { title: 'Charts', icon: 'mdi-camera', link: '/dashboard' },
+      { title: 'Notifications', icon: 'mdi-camera', link: '/dashboard' },
+      { title: 'Manage', icon: 'mdi-help', link: '/manage' },
+    ],
   }),
 
   watch: {
@@ -86,3 +90,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.v-list-item__icon {
+  margin-right: 10px !important;
+}
+
+.menu-item:hover {
+  background-color: rgba(0, 112, 217, 0.25) !important;
+}
+</style>
