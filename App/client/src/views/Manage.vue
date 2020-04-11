@@ -1,14 +1,16 @@
 <template>
   <v-slide-y-transition mode="out-in">
-    <v-container fluid>
+    <v-container fluid v-if="currentUser.user.role === 'Administrator'">
       <v-snackbar absolute v-model="snackbar.show" :color="snackbar.color" :timeout="snackbar.timeout" right top>
         {{ snackbar.text }}
       </v-snackbar>
 
-      <v-row align="center" justify="center">
-        <v-col cols="10">
-          <section id="actions">
+      <!-- User operations -->
+      <section id="user-actions">
+        <v-row align="center" justify="center">
+          <v-col cols="10">
             <h1 class="mb-5">User management</h1>
+
             <div class="my-2">
               <v-btn class="mx-1" @click="dialog = !dialog" depressed large color="success">
                 Add new user
@@ -24,13 +26,13 @@
                 <v-card>
                   <v-card-title class="headline mb-5">Add a new user</v-card-title>
                   <v-card-text>
-                    <v-form ref="signup" v-if="!loading" v-model="valid" @submit.prevent="signUp" @keydown.prevent.enter>
+                    <v-form ref="signup" v-model="valid" @submit.prevent="signUp" @keydown.prevent.enter>
                       <v-text-field outlined v-model="user.username" :rules="notEmptyRules" label="Username" required />
                       <v-text-field outlined v-model="user.displayName" :rules="notEmptyRules" label="Display Name" required />
                       <v-text-field outlined v-model="user.password" :rules="notEmptyRules" label="Password" type="password" required />
-                      <v-text-field outlined v-model="user.confirmPassword" :rules="confirmPasswordRules" label="Confirm Password" type="password" required />
+                      <v-text-field outlined v-model="user.confirmPassword" :rules="notEmptyRules" label="Confirm Password" type="password" required />
                       <v-text-field outlined v-model="user.imageUrl" :rules="notEmptyRules" label="Profile picture URL" required />
-
+                      <v-select outlined v-model="user.role" :items="roleItems" :rules="notEmptyRules" required label="Role selection"></v-select>
                       <v-btn @click="dialog = false" type="submit" color="primary" :disabled="!valid">
                         SignUp
                       </v-btn>
@@ -39,8 +41,6 @@
                         cancel
                       </v-btn>
                     </v-form>
-
-                    <v-progress-circular v-if="loading" :size="70" :width="7" indeterminate color="primary" />
                   </v-card-text>
                 </v-card>
               </v-dialog>
@@ -67,19 +67,61 @@
                 </v-card>
               </v-dialog>
             </v-row>
-          </section>
-        </v-col>
-      </v-row>
+          </v-col>
+        </v-row>
+      </section>
 
       <!-- User listing --->
-      <v-row class="my-10" align="center" justify="center">
-        <v-col cols="10">
-          <h1 class="mb-5">User listing</h1>
-          <FeathersVuexFind service="users" :query="{}">
-            <div slot-scope="props">
-              <v-data-table :headers="table.headers" :items="props.items" :items-per-page="table.displayAmount" class="elevation-1" />
-            </div>
-          </FeathersVuexFind>
+      <section id="user-listing">
+        <v-row class="my-10" align="center" justify="center">
+          <v-col cols="10">
+            <h1 class="mb-5">User listing</h1>
+            <FeathersVuexFind service="users" :query="{}">
+              <div slot-scope="props">
+                <v-data-table :headers="table.headers" :items="props.items" :items-per-page="table.displayAmount" class="elevation-1" />
+              </div>
+            </FeathersVuexFind>
+          </v-col>
+        </v-row>
+      </section>
+
+      <!-- section to enable/disable system wide notifications -->
+      <section id="notifications">
+        <v-row class="my-10" align="center" justify="center">
+          <v-col cols="10">
+            <h1 class="mb-5">Notifications</h1>
+          </v-col>
+        </v-row>
+      </section>
+
+      <!-- Loggings of user operations -->
+      <section id="logs">
+        <v-row class="my-10" align="center" justify="center">
+          <v-col cols="10">
+            <h1 class="mb-5">Logs</h1>
+            <FeathersVuexFind service="activities" :query="{}">
+              <div slot-scope="props">
+                <v-data-table :headers="logTable.headers" :items="props.items" :items-per-page="logTable.displayAmount" class="elevation-1" />
+              </div>
+            </FeathersVuexFind>
+          </v-col>
+        </v-row>
+      </section>
+
+      <!-- Section to see all memory / backup db -->
+      <section>
+        <v-row class="my-10" align="center" justify="center">
+          <v-col cols="10">
+            <h1 class="mb-5">Database</h1>
+          </v-col>
+        </v-row>
+      </section>
+    </v-container>
+
+    <v-container fluid v-else>
+      <v-row>
+        <v-col cols="12" align="center">
+          <h1>You are not allowed to access this page !</h1>
         </v-col>
       </v-row>
     </v-container>
@@ -87,12 +129,12 @@
 </template>
 
 <script>
+/* eslint-disable no-unused-vars */
 /**
  * TODO : clear form after submit
  */
-
 import { mapState } from 'vuex';
-import { notEmptyRules, confirmPasswordRules } from '@/validators';
+import { notEmptyRules } from '@/validators';
 import { FeathersVuexFind } from 'feathers-vuex';
 
 export default {
@@ -100,10 +142,14 @@ export default {
   components: {
     FeathersVuexFind,
   },
-  data: () => ({
+
+  data: (vm) => ({
     valid: false,
     removeUserDialog: false,
     dialog: false,
+
+    roleItems: ['Administrator', 'Member'],
+
     snackbar: {
       show: false,
       text: '',
@@ -115,9 +161,18 @@ export default {
       headers: [
         { text: 'UID', value: '_id', sortable: false },
         { text: 'Username', value: 'username', sortable: false },
+        { text: 'Role', value: 'role', sortable: false },
         { text: 'Display name', value: 'displayName', sortable: false },
         { text: 'Profile picture URL', value: 'imageUrl', sortable: false },
         { text: 'Created at', value: 'createdAt', sortable: false },
+      ],
+    },
+
+    logTable: {
+      displayAmount: 15,
+      headers: [
+        { text: 'Text', value: 'text', sortable: false },
+        { text: 'Date', value: 'createdAt' },
       ],
     },
 
@@ -128,22 +183,29 @@ export default {
       confirmPassword: '',
       displayName: '',
       imageUrl: '',
+      role: '',
     },
     notEmptyRules,
-    confirmPasswordRules,
   }),
+
   computed: {
-    ...mapState('users', { loading: 'isCreatePending' }),
+    ...mapState('auth', { currentUser: 'payload' }),
   },
+
   methods: {
     signUp() {
       if (this.valid) {
-        const { User } = this.$FeathersVuex.api;
+        const { User, Activity } = this.$FeathersVuex.api;
         const user = new User(this.user);
         user
           .save()
           .then((u) => {
             this.showSnackbar('success', `User created with username : ${u.username} !`);
+
+            // Show activity new user
+            const activity = new Activity();
+            activity.text = `${this.$store.state.auth.payload.user.username} added ${u.username} to the system`;
+            activity.save();
           })
           .catch((e) => {
             this.showSnackbar('error', `${e.message}`);
