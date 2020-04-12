@@ -1,96 +1,148 @@
 <template>
   <v-slide-y-transition mode="out-in">
-    <v-container fluid>
-      <v-row align="center" justify="center">
-        <v-col cols="10">
-          <h1 class="mb-5">User management</h1>
-          <div class="my-2">
-            <v-btn @click="dialog = !dialog" depressed large color="primary">Add new user</v-btn>
-          </div>
-          <v-row justify="center">
-            <v-dialog v-model="dialog" persistent max-width="500">
-              <v-card>
-                <v-card-title class="headline mb-5">Add a new user</v-card-title>
-                <v-card-text>
-                  <v-form
-                    v-if="!loading"
-                    v-model="valid"
-                    @submit.prevent="signUp"
-                    @keydown.prevent.enter
-                  >
-                    <v-text-field
-                      outlined
-                      v-model="user.username"
-                      :rules="notEmptyRules"
-                      label="Username"
-                      required
-                    ></v-text-field>
-                    <v-text-field
-                      outlined
-                      v-model="user.displayName"
-                      :rules="notEmptyRules"
-                      label="Display Name"
-                      required
-                    ></v-text-field>
-                    <v-text-field
-                      outlined
-                      v-model="user.password"
-                      :rules="notEmptyRules"
-                      label="Password"
-                      type="password"
-                      required
-                    ></v-text-field>
-                    <v-text-field
-                      outlined
-                      v-model="user.confirmPassword"
-                      :rules="confirmPasswordRules"
-                      label="Confirm Password"
-                      type="password"
-                      required
-                    ></v-text-field>
-                    <v-text-field
-                      outlined
-                      v-model="user.imageUrl"
-                      :rules="notEmptyRules"
-                      label="Profile picture URL"
-                      required
-                    ></v-text-field>
-                    <v-btn @click="dialog = false" type="submit" color="primary" :disabled="!valid"
-                      >SignUp</v-btn
-                    >
+    <v-container fluid v-if="user.user.role === 'Administrator'">
+      <v-snackbar v-model="snackbar.show" :color="snackbar.color" :timeout="snackbar.timeout" right top>{{ snackbar.text }}</v-snackbar>
 
-                    <v-btn class="mx-3" @click="dialog = false" type="submit" color="error"
-                      >cancel</v-btn
-                    >
-                  </v-form>
-
-                  <v-progress-circular
-                    v-if="loading"
-                    :size="70"
-                    :width="7"
-                    indeterminate
-                    color="primary"
-                  />
-                </v-card-text>
-              </v-card>
-            </v-dialog>
-          </v-row>
-        </v-col>
-      </v-row>
-
-      <v-row class="my-10" align="center" justify="center">
-        <v-col cols="10">
-          <h1 class="mb-5">User listing</h1>
-          <FeathersVuexFind service="users" :query="{}">
-            <div slot-scope="props">
-              <v-data-table
-                :headers="table.headers"
-                :items="props.items"
-                :items-per-page="table.displayAmount"
-                class="elevation-1"
-              ></v-data-table>
+      <!-- User operations -->
+      <section id="user-actions">
+        <v-row align="center" justify="center">
+          <v-col cols="10">
+            <h1 class="mb-5">User management</h1>
+            <div class="my-2">
+              <v-btn class="mx-1" @click="createUserDialog = !createUserDialog" depressed large color="success">Add new user</v-btn>
             </div>
-          </FeathersVuexFind>
+
+            <new-user-form :showing="createUserDialog" :creating="userIsCreating" :createUser="createUser"></new-user-form>
+          </v-col>
+        </v-row>
+        <v-row class="my-10" align="center" justify="center">
+          <v-col cols="10">
+            <FeathersVuexFind service="users" :query="{}">
+              <div slot-scope="props">
+                <v-data-table
+                  :headers="userTable.headers"
+                  :items="props.items"
+                  :sort-by.sync="userTable.sortBy"
+                  :sort-desc.sync="userTable.sortDesc"
+                  :items-per-page="userTable.displayAmount"
+                  class="elevation-1"
+                >
+                  <template v-slot:item.actions="{ item }">
+                    <v-icon small @click="deleteItem(item)">
+                      mdi-delete-outline
+                    </v-icon>
+                  </template>
+                </v-data-table>
+              </div>
+            </FeathersVuexFind>
+          </v-col>
+        </v-row>
+      </section>
+
+      <!-- section to enable/disable system wide notifications -->
+      <section id="notifications">
+        <v-row class="my-10" align="center" justify="center">
+          <v-col cols="10">
+            <h1 class="mb-5">Notifications</h1>
+            <div class="my-2">
+              <v-btn class="mx-1" @click="createNotificationDialog = !createNotificationDialog" depressed large color="success">New notification</v-btn>
+            </div>
+
+            <new-notification-form :showing="createNotificationDialog" :creating="creating" :createNotification="createNotification"></new-notification-form>
+          </v-col>
+        </v-row>
+        <v-row align="center" justify="center">
+          <v-col cols="10">
+            <FeathersVuexFind service="notifications" :query="{}">
+              <div slot-scope="props">
+                <v-data-table :headers="notificationTable.headers" :items="props.items" class="elevation-1">
+                  <template v-slot:top>
+                    <v-toolbar flat color="white">
+                      <v-dialog v-model="dialog" max-width="500px">
+                        <v-card>
+                          <v-card-text>
+                            <v-container>
+                              <v-row>
+                                <v-col cols="12">
+                                  <h1>Edit item</h1>
+                                </v-col>
+                                <v-col cols="12">
+                                  <v-text-field outlined v-model="editedItem.text" label="Text"></v-text-field>
+                                  <v-text-field outlined v-model="editedItem.type" label="Type"></v-text-field>
+                                  <v-switch v-model="editedItem.status" :label="`Status: ${convertItemStatus(editedItem.status)}`"></v-switch>
+                                </v-col>
+                              </v-row>
+                            </v-container>
+                          </v-card-text>
+
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+                            <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                    </v-toolbar>
+                  </template>
+                  <template v-slot:item.actions="{ item }">
+                    <v-icon small class="mr-2" @click="editItem(item)">
+                      mdi-pencil
+                    </v-icon>
+                  </template>
+                  <template v-slot:item.status="{ item }">
+                    <v-chip :color="getColor(item.status)" dark>{{ convertItemStatus(item.status) }}</v-chip>
+                  </template>
+                </v-data-table>
+              </div>
+            </FeathersVuexFind>
+          </v-col>
+        </v-row>
+      </section>
+
+      <!-- Loggings of user operations -->
+      <section id="logs">
+        <v-row class="my-10" align="center" justify="center">
+          <v-col cols="10">
+            <h1 class="mb-5">Logs</h1>
+            <div class="my-2">
+              <v-btn class="mx-1" color="primary" @click="downloadServerLog" depressed large>Download server log</v-btn>
+              <v-btn class="mx-1" color="primary" @click="downloadActionLog" depressed large>Download action log</v-btn>
+            </div>
+          </v-col>
+        </v-row>
+
+        <v-row align="center" justify="center">
+          <v-col cols="10">
+            <FeathersVuexFind service="activities" :query="{}">
+              <div slot-scope="props">
+                <v-data-table
+                  :headers="logTable.headers"
+                  :sort-by.sync="logTable.sortBy"
+                  :sort-desc.sync="logTable.sortDesc"
+                  :items="props.items"
+                  :items-per-page="logTable.displayAmount"
+                  class="elevation-1"
+                />
+              </div>
+            </FeathersVuexFind>
+          </v-col>
+        </v-row>
+      </section>
+
+      <!-- Section to see all memory / backup db -->
+      <section>
+        <v-row class="my-10" align="center" justify="center">
+          <v-col cols="10">
+            <h1 class="mb-5">Database</h1>
+          </v-col>
+        </v-row>
+      </section>
+    </v-container>
+
+    <v-container fluid v-else>
+      <v-row>
+        <v-col cols="12" align="center">
+          <h1>You are not allowed to access this page !</h1>
         </v-col>
       </v-row>
     </v-container>
@@ -98,59 +150,172 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import { notEmptyRules } from '@/validators';
+/* eslint-disable no-unused-vars */
+/* eslint-disable */
+
+import { mapState, mapActions } from 'vuex';
 import { FeathersVuexFind } from 'feathers-vuex';
+import { logTable, userTable, notificationTable, generateLogEntry } from '../utils/tableConfigs';
+
+import axios from 'axios';
+
+import NewUserFrom from '../components/forms/NewUserForm';
+import NewNotificationForm from '../components/forms/NewNotificationForm';
+import { generateSnackbar } from '@/utils/index';
 
 export default {
+  name: 'Manage',
   components: {
     FeathersVuexFind,
+    NewNotificationForm,
+    'new-user-form': NewUserFrom,
   },
-  name: 'signUp',
+
   data: (vm) => ({
-    valid: false,
     dialog: false,
-    table: {
-      displayAmount: 5,
-      headers: [
-        { text: 'Id', value: '_id', sortable: false },
-        { text: 'Username', value: 'username', sortable: false },
-        { text: 'Display name', value: 'displayName', sortable: false },
-        { text: 'Profile picture URL', value: 'imageUrl', sortable: false },
-        { text: 'Created at', value: 'createdAt', sortable: false },
-      ],
+    editedId: '',
+    editedItem: {
+      text: '',
+      type: '',
+      status: false,
     },
-    user: {
-      username: '',
-      password: '',
-      confirmPassword: '',
-      displayName: '',
-      imageUrl: '',
+
+    snackbar: {
+      show: false,
+      text: '',
+      color: 'success',
+      timeout: 6000,
     },
-    notEmptyRules,
-    confirmPasswordRules: [
-      (confirmPassword) => confirmPassword === vm.user.password || 'Password must match.',
-    ],
+
+    logTable,
+    userTable,
+    notificationTable,
+
+    createNotificationDialog: false,
+    createUserDialog: false,
   }),
-  computed: {
-    ...mapState('users', { loading: 'isCreatePending' }),
+  watch: {
+    dialog(val) {
+      val || this.close();
+    },
   },
+
+  computed: {
+    ...mapState('auth', { user: 'payload' }),
+    ...mapState('notifications', { creating: 'isCreatePending' }),
+    ...mapState('auth', { userIsCreating: 'isCreatePending' }),
+  },
+
   methods: {
-    signUp() {
-      if (this.valid) {
+    ...mapActions('notifications', ['update']),
+
+    convertItemStatus(item) {
+      if (item === true) return 'Active';
+      else return 'Inactive';
+    },
+    getColor(status) {
+      if (status === true) return 'green';
+      else return 'red';
+    },
+    editItem(item) {
+      this.editedId = item._id;
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+
+    close() {
+      this.dialog = false;
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedId = '';
+      }, 300);
+    },
+
+    async save() {
+      if (this.editedId != null) {
+        console.log(this.editedItem);
+        try {
+          await this.update([this.editedId, this.editedItem]);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      this.close();
+    },
+
+    async updateStatus(item) {},
+
+    async deleteItem(item) {
+      const choice = window.confirm('Are you sure you want to delete this item?');
+      if (choice === true) {
         const { User } = this.$FeathersVuex.api;
-        const user = new User(this.user);
-        user
-          .save()
-          .then((u) => {
-            console.log(u);
+        User.get(item._id)
+          .then((user) => {
+            user
+              .remove()
+              .then((u) => {
+                this.generateLogEntry(`${this.user.user.username} deleted ${u.username} from the system.`);
+                generateSnackbar(this.snackbar, 'success', 'User deleted successfully');
+              })
+              .catch((e) => {
+                generateSnackbar(this.snackbar, 'error', 'Error deleting user !');
+                this.generateLogEntry(`${this.user.user.username} failed to delete ${u.username} from the system.`);
+              });
           })
           .catch((e) => {
-            console.error(e);
+            this.showSnackbar('error', `${e.message}`);
           });
       }
     },
+
+    async createNotification(notification) {
+      const { Notification } = this.$FeathersVuex.api;
+      const newNotification = new Notification(notification);
+      try {
+        await newNotification.save();
+        this.generateLogEntry(`${this.user.user.username} created a new notification with text ${newNotification.text}.`);
+        generateSnackbar(this.snackbar, 'success', 'Notification created successfully !');
+      } catch (error) {
+        generateSnackbar(this.snackbar, 'error', error);
+      }
+    },
+
+    async createUser(user) {
+      const { User } = this.$FeathersVuex.api;
+      const newUser = new User(user);
+      try {
+        await newUser.save();
+        this.generateLogEntry(`${this.user.user.username} added ${newUser.username} to the system.`);
+        generateSnackbar(this.snackbar, 'success', 'User created successfully !');
+      } catch (error) {
+        generateSnackbar(this.snackbar, 'error', error);
+      }
+    },
+
+    async generateLogEntry(text) {
+      const { Activity } = this.$FeathersVuex.api;
+      const activity = new Activity();
+      activity.text = text;
+      await activity.save();
+    },
+
+    downloadServerLog() {
+      axios({
+        url: 'http://localhost:3030/logs/download',
+        method: 'GET',
+        responseType: 'http://localhost:8080', // important
+      }).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'logging.log');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
+      });
+    },
+    downloadActionLog() {},
   },
 };
 </script>
-<style scoped></style>
