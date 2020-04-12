@@ -44,7 +44,7 @@
 
 <script>
 /* eslint-disable */
-import { notEmptyRules } from '../validators';
+import { notEmptyRules } from '../../utils/formRules';
 
 export default {
   data() {

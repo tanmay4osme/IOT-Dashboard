@@ -83,6 +83,9 @@ export default {
   computed: {
     ...mapState('auth', { user: 'payload' }),
   },
+  mounted() {
+    console.log(this.$store);
+  },
   methods: {
     logout() {
       this.$store.dispatch('auth/logout').then(() => this.$router.push('/login'));

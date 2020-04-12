@@ -33,7 +33,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { notEmptyRules } from '@/validators';
+import { notEmptyRules } from '../utils/formRules';
 
 export default {
   name: 'signUp',

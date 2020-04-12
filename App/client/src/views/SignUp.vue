@@ -6,53 +6,15 @@
           <v-card class="mx-auto my-auto pa-10" max-width="500" outlined>
             <v-form v-if="!loading" v-model="valid" @submit.prevent="signUp" @keydown.prevent.enter>
               <h3 class="mb-10">Please sign up !</h3>
-              <v-text-field
-                outlined
-                v-model="user.username"
-                :rules="notEmptyRules"
-                label="Username"
-                required
-              ></v-text-field>
-              <v-text-field
-                outlined
-                v-model="user.displayName"
-                :rules="notEmptyRules"
-                label="Display Name"
-                required
-              ></v-text-field>
-              <v-text-field
-                outlined
-                v-model="user.password"
-                :rules="notEmptyRules"
-                label="Password"
-                type="password"
-                required
-              ></v-text-field>
-              <v-text-field
-                outlined
-                v-model="user.confirmPassword"
-                :rules="confirmPasswordRules"
-                label="Confirm Password"
-                type="password"
-                required
-              ></v-text-field>
-              <v-text-field
-                outlined
-                v-model="user.imageUrl"
-                :rules="notEmptyRules"
-                label="Profile picture URL"
-                required
-              ></v-text-field>
+              <v-text-field outlined v-model="user.username" :rules="notEmptyRules" label="Username" required></v-text-field>
+              <v-text-field outlined v-model="user.displayName" :rules="notEmptyRules" label="Display Name" required></v-text-field>
+              <v-text-field outlined v-model="user.password" :rules="notEmptyRules" label="Password" type="password" required></v-text-field>
+              <v-text-field outlined v-model="user.confirmPassword" :rules="confirmPasswordRules" label="Confirm Password" type="password" required></v-text-field>
+              <v-text-field outlined v-model="user.imageUrl" :rules="notEmptyRules" label="Profile picture URL" required></v-text-field>
               <v-btn type="submit" :disabled="!valid">SignUp</v-btn>
             </v-form>
 
-            <v-progress-circular
-              v-if="loading"
-              :size="70"
-              :width="7"
-              indeterminate
-              color="primary"
-            />
+            <v-progress-circular v-if="loading" :size="70" :width="7" indeterminate color="primary" />
           </v-card>
         </v-col>
       </v-row>
@@ -62,7 +24,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { notEmptyRules } from '@/validators';
+import { notEmptyRules } from '../utils/formRules';
 
 export default {
   name: 'signUp',
@@ -76,9 +38,7 @@ export default {
       imageUrl: '',
     },
     notEmptyRules,
-    confirmPasswordRules: [
-      (confirmPassword) => confirmPassword === vm.user.password || 'Password must match.',
-    ],
+    confirmPasswordRules: [(confirmPassword) => confirmPassword === vm.user.password || 'Password must match.'],
   }),
   computed: {
     ...mapState('users', { loading: 'isCreatePending' }),
