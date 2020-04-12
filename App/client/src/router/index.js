@@ -8,7 +8,6 @@ import Dashboard from '../views/Dashboard.vue';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Manage from '../views/Manage.vue';
-import SignUp from '../views/SignUp.vue';
 
 import store from '../store/index';
 
@@ -40,11 +39,6 @@ const routes = [
           next('/login');
         });
     },
-  },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: SignUp,
   },
   {
     path: '/login',

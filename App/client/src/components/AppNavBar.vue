@@ -10,9 +10,7 @@
 
       <div v-if="!user">
         <v-btn text class="mx-2" :to="{ name: 'login' }">Login</v-btn>
-        <v-btn text class="mx-2" :to="{ name: 'signup' }">Signup</v-btn>
       </div>
-
       <div v-if="user">
         <v-btn text class="mx-2" @click="logout">Logout</v-btn>
       </div>
