@@ -10,7 +10,7 @@
       <v-row align="center" justify="center">
         <v-col cols="8">
           <v-card class="mx-auto my-auto pa-10" max-width="344" outlined>
-            <v-form v-if="!loading" v-model="valid" @submit.prevent="login" @keydown.prevent.enter>
+            <v-form v-if="!loading" v-model="valid" @submit.prevent="login({ valid, user })" @keydown.prevent.enter>
               <h3 class="mb-10">
                 Welcome back!
                 <br />
@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import { notEmptyRules } from '@/validators';
+import { mapState, mapActions } from 'vuex';
+import { notEmptyRules } from '../utils/formRules';
 
 export default {
   name: 'signUp',
@@ -50,22 +50,7 @@ export default {
     ...mapState('users', { loading: 'isAuthenticatePending' }),
   },
   methods: {
-    login() {
-      if (this.valid) {
-        this.$store
-          .dispatch('auth/authenticate', {
-            strategy: 'local',
-            ...this.user,
-          })
-
-          .then(() => {
-            this.$router.push('/dashboard');
-          })
-          .catch((e) => {
-            this.error = e.message;
-          });
-      }
-    },
+    ...mapActions('localAuth', ['login']),
   },
 };
 </script>

@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-export const userTable = {
+const userTable = {
   displayAmount: 5,
   sortBy: 'createdAt',
   sortDesc: true,
@@ -11,10 +11,11 @@ export const userTable = {
     { text: 'Display name', value: 'displayName', sortable: false },
     { text: 'Profile picture URL', value: 'imageUrl', sortable: false },
     { text: 'Created at', value: 'createdAt', sortable: true },
+    { text: 'Remove user', value: 'actions', sortable: false },
   ],
 };
 
-export const logTable = {
+const logTable = {
   displayAmount: 15,
   sortBy: 'createdAt',
   sortDesc: true,
@@ -24,11 +25,15 @@ export const logTable = {
   ],
 };
 
-export const notificationTable = {
+const notificationTable = {
   headers: [
     { text: 'UID', value: '_id', sortable: false },
     { text: 'Text', value: 'text', sortable: false },
+    { text: 'Status', value: 'status', sortable: false },
     { text: 'Type', value: 'type', sortable: false },
     { text: 'Date', value: 'createdAt', sortable: false },
+    { text: 'Toggle Status', value: 'actions', sortable: false },
   ],
 };
+
+export { userTable, logTable, notificationTable };

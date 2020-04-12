@@ -1,7 +1,9 @@
 // src/store/services/users.js
 /*eslint-disable */
-import feathersClient, { makeServicePlugin, BaseModel } from '../../feathers-client';
+import feathersClient from '../../feathers-client';
+import feathersVuex from '../feathersVuex';
 
+const { makeServicePlugin, BaseModel } = feathersVuex;
 class Activity extends BaseModel {
   constructor(data, options) {
     super(data, options);

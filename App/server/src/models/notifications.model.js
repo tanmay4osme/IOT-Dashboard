@@ -10,6 +10,7 @@ module.exports = function (app) {
     {
       text: { type: String, required: true },
       type: { type: String, required: true },
+      status: { type: Boolean, required: true },
     },
     {
       timestamps: true,
