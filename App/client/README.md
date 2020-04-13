@@ -146,3 +146,5 @@ export default {
       this.snackbar.text = text;
       this.snackbar.show = true;
     },
+
+//https://vuetifyjs.com/en/components/menus/#popover-menu
