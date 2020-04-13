@@ -29,6 +29,9 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      breadcrumb: [{ name: 'Home', link: '/' }],
+    },
     beforeEnter(to, from, next) {
       store
         .dispatch('auth/authenticate')
@@ -50,24 +53,48 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     beforeEnter: isLoggedIn,
+    meta: {
+      breadcrumb: [
+        { name: 'Home', link: '/dashboard' },
+        { name: 'Dashboard', link: '/dashboard' },
+      ],
+    },
   },
   {
     path: '/manage',
     name: 'Manage',
     component: Manage,
     beforeEnter: isLoggedIn,
+    meta: {
+      breadcrumb: [
+        { name: 'Home', link: '/dashboard' },
+        { name: 'manage', link: '/manage' },
+      ],
+    },
   },
   {
     path: '/camera',
     name: 'Camera',
     component: Camera,
     beforeEnter: isLoggedIn,
+    meta: {
+      breadcrumb: [
+        { name: 'Home', link: '/dashboard' },
+        { name: 'Camera', link: '/camera' },
+      ],
+    },
   },
   {
     path: '/charts',
     name: 'Charts',
     component: Charts,
     beforeEnter: isLoggedIn,
+    meta: {
+      breadcrumb: [
+        { name: 'Home', link: '/dashboard' },
+        { name: 'Charts', link: '/charts' },
+      ],
+    },
   },
 ];
 

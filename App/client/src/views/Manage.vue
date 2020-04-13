@@ -5,38 +5,40 @@
 
       <!-- User operations -->
       <section id="user-actions">
-        <v-row align="center" justify="center">
-          <v-col cols="10">
-            <h1 class="mb-5">User management</h1>
-            <div class="my-2">
-              <v-btn class="mx-1" @click="createUserDialog = !createUserDialog" depressed large color="success">Add new user</v-btn>
-            </div>
-
-            <new-user-form :showing="createUserDialog" :creating="userIsCreating" :createUser="createUser"></new-user-form>
-          </v-col>
-        </v-row>
-        <v-row class="my-10" align="center" justify="center">
-          <v-col cols="10">
-            <FeathersVuexFind service="users" :query="{}">
-              <div slot-scope="props">
-                <v-data-table
-                  :headers="userTable.headers"
-                  :items="props.items"
-                  :sort-by.sync="userTable.sortBy"
-                  :sort-desc.sync="userTable.sortDesc"
-                  :items-per-page="userTable.displayAmount"
-                  class="elevation-1"
-                >
-                  <template v-slot:item.actions="{ item }">
-                    <v-icon small @click="deleteItem(item)">
-                      mdi-delete-outline
-                    </v-icon>
-                  </template>
-                </v-data-table>
+        <v-container fluid>
+          <v-row align="center" justify="center">
+            <v-col cols="10">
+              <h1 class="mb-5">User management</h1>
+              <div class="my-2">
+                <v-btn class="mx-1" @click="createUserDialog = !createUserDialog" depressed large color="success">Add new user</v-btn>
               </div>
-            </FeathersVuexFind>
-          </v-col>
-        </v-row>
+
+              <new-user-form :showing="createUserDialog" :creating="userIsCreating" :createUser="createUser"></new-user-form>
+            </v-col>
+          </v-row>
+          <v-row class="my-10" align="center" justify="center">
+            <v-col cols="10">
+              <FeathersVuexFind service="users" :query="{}">
+                <div slot-scope="props">
+                  <v-data-table
+                    :headers="userTable.headers"
+                    :items="props.items"
+                    :sort-by.sync="userTable.sortBy"
+                    :sort-desc.sync="userTable.sortDesc"
+                    :items-per-page="userTable.displayAmount"
+                    class="elevation-1"
+                  >
+                    <template v-slot:item.actions="{ item }">
+                      <v-icon small @click="deleteItem(item)">
+                        mdi-delete-outline
+                      </v-icon>
+                    </template>
+                  </v-data-table>
+                </div>
+              </FeathersVuexFind>
+            </v-col>
+          </v-row>
+        </v-container>
       </section>
 
       <!-- section to enable/disable system wide notifications -->
@@ -319,3 +321,5 @@ export default {
   },
 };
 </script>
+
+<style lang="scss"></style>
