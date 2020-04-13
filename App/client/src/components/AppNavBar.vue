@@ -23,9 +23,35 @@
 
       <v-spacer></v-spacer>
       <div v-if="user">
-        <v-badge class="hover mx-5" :content="1" :value="1" color="red" overlap>
-          <v-icon>mdi-bell</v-icon>
-        </v-badge>
+        <v-menu transition="slide-y-transition" v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-y>
+          <template v-slot:activator="{ on }">
+            <v-badge class="hover mx-5" :content="1" :value="1" color="red" overlap>
+              <v-icon v-on="on">mdi-bell</v-icon>
+            </v-badge>
+          </template>
+
+          <v-card>
+            <v-list>
+              <FeathersVuexFind service="notifications" :query="{ status: true }" watch="query">
+                <div slot-scope="props">
+                  <v-list-item dense border="left" v-for="item in props.items" :key="item.id">
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.type }}</v-list-item-title>
+                      <v-list-item-subtitle>{{ item.text }}</v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+                </div>
+              </FeathersVuexFind>
+            </v-list>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" text @click="menu = false">Ok</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
         <font-awesome-icon class="hover" @click="toggleDarkMode" :icon="['fa', 'sun']" size="lg" />
         <font-awesome-icon class="hover mx-5" link @click="logout" :icon="['fa', 'power-off']" size="lg" />
       </div>
@@ -42,13 +68,74 @@
 
         <v-divider class="mb-2"></v-divider>
 
-        <v-list-item v-for="item in navigator.items" :key="item.title" link :to="{ path: item.link }" exact>
+        <!-- Dashboard -->
+        <v-list-item link :to="{ path: '/dashboard' }" exact>
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>Dashboard</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- Camera -->
+        <v-list-item link :to="{ path: '/camera' }" exact>
+          <v-list-item-icon>
+            <v-icon>mdi-camera</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Camera</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- Charts -->
+        <v-list-item link :to="{ path: '/charts' }" exact>
+          <v-list-item-icon>
+            <v-icon>mdi-chart-bar</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Charts</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <!-- Manage -->
+        <v-list-group prepend-icon="mdi-cog" no-action>
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title>Manage</v-list-item-title>
+            </v-list-item-content>
+          </template>
+
+          <v-list-item link :to="{ name: 'users' }" exact>
+            <v-list-item-content>
+              <v-list-item-title>Users</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item link :to="{ name: 'notifications' }" exact>
+            <v-list-item-content>
+              <v-list-item-title>Notifications</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item link :to="{ name: 'logs' }" exact>
+            <v-list-item-content>
+              <v-list-item-title>Logs</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
+
+        <!-- Account -->
+        <v-list-item link :to="{ path: '/account' }" exact>
+          <v-list-item-icon>
+            <v-icon>mdi-account</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Account</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -69,15 +156,12 @@ export default {
 
   data() {
     return {
+      fav: true,
+      menu: false,
+      message: false,
+      hints: true,
       navigator: {
         show: false,
-        items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard', link: 'dashboard' },
-          { title: 'Camera ', icon: 'mdi-camera', link: 'camera' },
-          { title: 'Charts', icon: 'mdi-chart-bar', link: 'charts' },
-          { title: 'Manage', icon: 'mdi-cog', link: 'manage' },
-          { title: 'My account', icon: 'mdi-account', link: 'account' },
-        ],
       },
       loading: false,
       items: [],

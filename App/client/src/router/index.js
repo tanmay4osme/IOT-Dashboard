@@ -9,6 +9,10 @@ import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Manage from '../views/Manage.vue';
 
+import Users from '../views/Manage/Users.vue';
+import Notifications from '../views/Manage/Notifications.vue';
+import Logs from '../views/Manage/Logs.vue';
+
 import store from '../store/index';
 
 Vue.use(VueRouter);
@@ -62,9 +66,18 @@ const routes = [
   },
   {
     path: '/manage',
-    name: 'Manage',
-    component: Manage,
+    component: {
+      render(c) {
+        return c('router-view');
+      },
+    },
     beforeEnter: isLoggedIn,
+    children: [
+      { path: '', component: Manage, name: 'Manage', beforeEnter: isLoggedIn },
+      { path: 'users', name: 'users', component: Users },
+      { path: 'notifications', name: 'notifications', component: Notifications },
+      { path: 'logs', name: 'logs', component: Logs },
+    ],
     meta: {
       breadcrumb: [
         { name: 'Home', link: '/dashboard' },
