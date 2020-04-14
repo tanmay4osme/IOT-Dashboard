@@ -2,7 +2,7 @@
   <v-app>
     <app-navbar :user="user" :logout="logout"></app-navbar>
     <v-content>
-      <div v-if="user" id="breadcrumbs" dark class="elevation-15">
+      <div v-if="user" id="breadcrumbs" class="elevation-15">
         <v-breadcrumbs :items="breadcrumbList">
           <template v-slot:item="{ item }">
             <v-breadcrumbs-item :href="item.link" :disabled="item.disabled">
@@ -68,13 +68,13 @@ export default {
   position: fixed;
   z-index: 1;
   width: 100vw;
-  background-color: rgb(39, 39, 39) !important;
+  //background-color: rgb(39, 39, 39) !important;
 }
 
 .v-breadcrumbs__divider {
-  color: white !important;
+  //color: white !important;
 }
 .v-breadcrumbs__item {
-  color: white !important;
+  //color: white !important;
 }
 </style>

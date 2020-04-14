@@ -1,7 +1,7 @@
 <!-- eslint-disable -->
 <template>
   <div>
-    <v-app-bar app dark flat>
+    <v-app-bar app flat>
       <div v-if="user" class="d-flex align-center">
         <v-app-bar-nav-icon @click.stop="navigator.show = !navigator.show"></v-app-bar-nav-icon>
 
@@ -62,7 +62,7 @@
 
     <app-notification-viewer></app-notification-viewer>
 
-    <v-navigation-drawer v-model="navigator.show" :expand-on-hover.sync="!navigator.show" :mini-variant.sync="!navigator.show" permanent v-if="user" app dark>
+    <v-navigation-drawer v-model="navigator.show" :expand-on-hover.sync="!navigator.show" :mini-variant.sync="!navigator.show" permanent v-if="user" app >
       <v-list dense nav class="py-0">
         <app-avatar :user="user.user"></app-avatar>
 
@@ -254,9 +254,7 @@ export default {
 </script>
 
 <style lang="scss">
-.v-navigation-drawer {
-  background-color: rgb(39, 39, 39) !important;
-}
+
 
 .hover {
   cursor: pointer;
