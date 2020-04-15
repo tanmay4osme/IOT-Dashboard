@@ -1,29 +1,25 @@
+<!-- eslint-disable -->
 <template>
   <v-slide-y-transition mode="out-in">
     <v-container fluid>
-      <v-row justify="center">
-        <v-col cols="8">
-          <v-alert v-if="error" border="right" colored-border type="error" elevation="2">{{ error }} : Please check your credentials! If you don't have an account ask the system admin.</v-alert>
-        </v-col>
-      </v-row>
-
       <v-row align="center" justify="center">
         <v-col cols="8">
           <v-card class="mx-auto my-auto pa-10" max-width="344" outlined>
-            <v-form v-if="!loading" v-model="valid" @submit.prevent="login({ valid, user })" @keydown.prevent.enter>
-              <h3 class="mb-10">
-                Welcome back!
-                <br />
-                Log in to your account.
-              </h3>
+            <ValidationObserver ref="observer">
+              <v-form @keydown.prevent.enter @submit.prevent="login({ valid, user })" v-model="valid">
+                <h3 class="mb-10"> Welcome back! <br/>  Log in to your account. </h3>
 
-              <v-text-field outlined v-model="user.username" :rules="notEmptyRules" label="Username" required />
-              <v-text-field outlined v-model="user.password" :rules="notEmptyRules" label="Password" type="password" required />
+                <ValidationProvider v-slot="{ errors }" name="Username" rules="required|alpha_num">
+                  <v-text-field label="Username" outlined required v-model="user.username" :error-messages="errors"/>
+                </ValidationProvider>
 
-              <v-btn type="submit" :disabled="!valid">Login</v-btn>
-            </v-form>
+                <ValidationProvider v-slot="{ errors }" name="Password" rules="required">
+                  <v-text-field label="Password" outlined required type="password" v-model="user.password" :error-messages="errors"/>
+                </ValidationProvider>
 
-            <v-progress-circular v-if="loading" :size="70" :width="7" indeterminate color="primary" />
+                <v-btn :disabled="!valid" type="submit">Login</v-btn>
+              </v-form>
+            </ValidationObserver>
           </v-card>
         </v-col>
       </v-row>
@@ -32,25 +28,39 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-import { notEmptyRules } from '../utils/formRules';
+  /* eslint-disable */
+  import { mapActions, mapState } from 'vuex';
+  import { required, alpha_num } from 'vee-validate/dist/rules';
+  import { extend, setInteractionMode } from 'vee-validate';
 
-export default {
-  name: 'signUp',
-  data: () => ({
-    valid: false,
-    error: '',
-    user: {
-      username: '',
-      password: '',
+  setInteractionMode('aggressive');
+
+  extend('required', {
+    ...required,
+    message: '{_field_} can not be empty!',
+  });
+
+  extend('alpha_num', {
+    ...alpha_num,
+    message: '{_field_} may only contain alpha-numeric characters!',
+  });
+
+  export default {
+    name: 'Login',
+    data() {
+      return {
+        valid: false,
+        user: {
+          username: '',
+          password: '',
+        },
+      };
     },
-    notEmptyRules,
-  }),
-  computed: {
-    ...mapState('users', { loading: 'isAuthenticatePending' }),
-  },
-  methods: {
-    ...mapActions('localAuth', ['login']),
-  },
-};
+    computed: {
+      ...mapState('users', { loading: 'isAuthenticatePending' })
+    },
+    methods: {
+      ...mapActions('localAuth', ['login']),
+    },
+  };
 </script>

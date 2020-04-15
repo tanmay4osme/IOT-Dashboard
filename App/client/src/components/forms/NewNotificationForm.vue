@@ -1,16 +1,25 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent max-width="500">
+    <v-dialog max-width="500" persistent v-model="dialog">
       <v-card>
         <v-card-title class="headline mb-5">Create a new notification</v-card-title>
         <v-card-text>
-          <v-form v-model="valid" @submit.prevent="onCreateNotification" @keydown.prevent.enter>
-            <v-text-field outlined v-model="notification.text" :rules="notEmptyRules" label="Text" required />
-            <v-select outlined v-model="notification.type" :items="types" :rules="notEmptyRules" required label="Type selection"></v-select>
-            <v-switch v-model="notification.status" :label="`Status:  ${notification.status}`"></v-switch>
-            <v-btn @click="dialog = !dialog" color="primary" type="submit" class="mx-3" :disabled="!valid">Create new notification</v-btn>
-            <v-btn @click="dialog = !dialog" color="error">cancel</v-btn>
-          </v-form>
+          <ValidationObserver ref="notificationObserver">
+            <v-form @keydown.prevent.enter @submit.prevent="onCreateNotification" v-model="valid">
+
+              <ValidationProvider v-slot="{ errors }" name="Text" rules="required|alpha_spaces">
+                <v-text-field label="Text" outlined required v-model="notification.text" :error-messages="errors"/>
+              </ValidationProvider>
+
+              <ValidationProvider v-slot="{ errors }" name="Text" rules="required">
+                <v-select :items="types" label="Type selection" outlined required v-model="notification.type" :error-messages="errors"></v-select>
+              </ValidationProvider>
+              <v-switch :label="`Status:  ${notification.status}`" v-model="notification.status"></v-switch>
+              <v-btn :disabled="!valid" @click="dialog = !dialog" class="mx-3" color="green" type="submit">Create new notification
+              </v-btn>
+              <v-btn @click="dialog = !dialog" color="error">cancel</v-btn>
+            </v-form>
+          </ValidationObserver>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -18,45 +27,59 @@
 </template>
 
 <script>
-import notEmptyRules from '../../utils/formRules';
+  /* eslint-disable */
+  import { required, alpha_spaces } from 'vee-validate/dist/rules';
+  import { extend, setInteractionMode } from 'vee-validate';
+
+  setInteractionMode('aggressive');
+
+  extend('required', {
+    ...required,
+    message: '{_field_} can not be empty!',
+  });
+
+  extend('alpha_spaces', {
+    ...alpha_spaces,
+    message: '{_field_} may contain alphabetic characters or spaces.',
+  });
+
 
 export default {
-  props: ['creating', 'createNotification', 'showing'],
+    props: ['creating', 'createNotification', 'showing'],
 
-  data: () => ({
-    valid: false,
-    dialog: false,
-    types: ['success', 'info', 'warning', 'error'],
-    notification: {
-      text: '',
-      type: '',
-      status: true,
-    },
-    notEmptyRules,
-  }),
+    data: () => ({
+      valid: false,
+      dialog: false,
+      types: ['success', 'info', 'warning', 'error'],
+      notification: {
+        text: '',
+        type: '',
+        status: true,
+      },
+    }),
 
-  watch: {
-    showing: {
-      immediate: true,
-      handler() {
-        this.dialog = this.showing;
+    watch: {
+      showing: {
+        immediate: true,
+        handler() {
+          this.dialog = this.showing;
+        },
       },
     },
-  },
 
-  methods: {
-    async onCreateNotification() {
-      if (this.valid) {
-        await this.createNotification(this.notification);
-        this.notification = {
-          text: '',
-          type: '',
-          status: true,
-        };
-      }
+    methods: {
+      async onCreateNotification() {
+        if (this.valid) {
+          await this.createNotification(this.notification);
+          this.notification = {
+            text: '',
+            type: '',
+            status: true,
+          };
+        }
+      },
     },
-  },
-};
+  };
 </script>
 
 <style lang="scss" scoped></style>
