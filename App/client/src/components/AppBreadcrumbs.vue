@@ -1,8 +1,8 @@
 <template>
-  <div class="elevation-15" id="breadcrumbs">
-    <v-breadcrumbs :items="breadcrumbList">
+  <div class="elevation-15 breadcrumb primary">
+    <v-breadcrumbs  :items="breadcrumbList">
       <template v-slot:item="{ item }">
-        <v-breadcrumbs-item :disabled="item.disabled" :href="item.link">
+        <v-breadcrumbs-item class="app-white-text" :disabled="item.disabled" :href="item.link">
           {{ item.name.toUpperCase() }}
         </v-breadcrumbs-item>
       </template>
@@ -27,6 +27,19 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss">
+  .breadcrumb {
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
+  }
+  .v-breadcrumbs__divider {
+    color: white !important;
+  }
+  .app-white-text {
+    & a {
+      color: white !important;
+     }
+  }
 
 </style>

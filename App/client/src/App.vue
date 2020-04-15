@@ -3,7 +3,7 @@
     <app-tool-bar :user="user" :logout="logout" :navigator="navigator"></app-tool-bar>
     <app-nav-bar :user="user" :navigator="navigator"></app-nav-bar>
 
-    <v-content>
+    <v-content :class="$vuetify.theme.isDark ? '' : 'grey lighten-2'">
       <app-breadcrumbs></app-breadcrumbs>
       <app-notifications></app-notifications>
       <router-view/>

@@ -23,6 +23,7 @@ class User extends BaseModel {
       role: 'Member',
       email: '',
       phone: '',
+      darkMode: false
     };
   }
 }

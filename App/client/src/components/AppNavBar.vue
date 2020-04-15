@@ -1,6 +1,6 @@
 <!-- eslint-disable -->
 <template>
-  <v-navigation-drawer v-if="user" :expand-on-hover.sync="!navigator.show" :mini-variant.sync="!navigator.show" app permanent v-model="navigator.show">
+  <v-navigation-drawer :color="$vuetify.theme.isDark ? 'primary' : 'white'" v-if="user" :expand-on-hover.sync="!navigator.show" :mini-variant.sync="!navigator.show" app permanent v-model="navigator.show">
     <v-list class="py-0" dense nav>
       <app-avatar :user="user"></app-avatar>
 
@@ -40,7 +40,7 @@
       </v-list-item>
 
       <!-- Manage -->
-      <v-list-group no-action prepend-icon="mdi-cog" >
+      <v-list-group :color="$vuetify.theme.isDark ? 'white' : ''" no-action prepend-icon="mdi-cog" >
         <template v-slot:activator>
           <v-list-item-content>
             <v-list-item-title>Manage</v-list-item-title>

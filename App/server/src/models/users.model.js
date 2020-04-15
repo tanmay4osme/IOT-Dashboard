@@ -14,6 +14,7 @@ module.exports = function (app) {
       role: { type: String, required: true, default: 'Member' },
       email: { type: String, required: true },
       phone: { type: String, required: true },
+      darkMode: { type: Boolean, required: true, default: false },
     },
     {
       timestamps: true,

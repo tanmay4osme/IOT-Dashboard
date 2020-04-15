@@ -22,7 +22,7 @@
           <v-container class=" pt-0">
             <v-row>
               <v-col class="pa-0" cols="12">
-                <div align="center" class="top">
+                <div align="center" :class="$vuetify.theme.isDark ? 'top white' : 'top primary'">
                   <div class="user-info">
                     <h2>{{ user.displayName }}</h2>
                     <h4>{{ user.role }}</h4>
@@ -149,7 +149,7 @@
 
 <style lang="scss">
   .top {
-    background-color: white;
+    //background-color: white;
     color: black;
     height: 22vh;
     border-radius: 4px;
