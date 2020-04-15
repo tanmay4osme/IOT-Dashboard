@@ -6,11 +6,13 @@ import feathersVuex from '../feathersVuex';
 const { makeServicePlugin, BaseModel } = feathersVuex;
 
 class User extends BaseModel {
+  // Required for $FeathersVuex plugin to work after production transpile.
+  static modelName = 'User';
+
   constructor(data, options) {
     super(data, options);
   }
-  // Required for $FeathersVuex plugin to work after production transpile.
-  static modelName = 'User';
+
   // Define default properties here
   static instanceDefaults() {
     return {
@@ -19,9 +21,13 @@ class User extends BaseModel {
       displayName: '',
       imageUrl: '',
       role: 'Member',
+      email: '',
+      phone: '',
+      darkMode: false
     };
   }
 }
+
 const servicePath = 'users';
 const servicePlugin = makeServicePlugin({
   Model: User,

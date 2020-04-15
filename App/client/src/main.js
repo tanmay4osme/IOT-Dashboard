@@ -1,16 +1,12 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSun, faPowerOff, faBell } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Vue from 'vue';
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
 
-library.add(faSun, faPowerOff, faBell);
-
-Vue.component('font-awesome-icon', FontAwesomeIcon);
-
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
 Vue.config.productionTip = false;
 
 new Vue({

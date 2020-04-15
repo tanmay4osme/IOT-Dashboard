@@ -1,6 +1,5 @@
 /* eslint-disable */
 import router from '@/router';
-import Vue from 'vue';
 
 const actions = {
   async login({ dispatch }, { valid, user }) {

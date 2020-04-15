@@ -7,12 +7,11 @@ import Charts from '../views/Charts.vue';
 import Dashboard from '../views/Dashboard.vue';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
-import Manage from '../views/Manage.vue';
 
 import Users from '../views/Manage/Users.vue';
 import Notifications from '../views/Manage/Notifications.vue';
 import Logs from '../views/Manage/Logs.vue';
-
+import Account from '../views/Account.vue';
 import store from '../store/index';
 
 Vue.use(VueRouter);
@@ -54,7 +53,7 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'Dashboard',
+    name: 'dashboard',
     component: Dashboard,
     beforeEnter: isLoggedIn,
     meta: {
@@ -73,10 +72,47 @@ const routes = [
     },
     beforeEnter: isLoggedIn,
     children: [
-      { path: '', component: Manage, name: 'Manage', beforeEnter: isLoggedIn },
-      { path: 'users', name: 'users', component: Users },
-      { path: 'notifications', name: 'notifications', component: Notifications },
-      { path: 'logs', name: 'logs', component: Logs },
+      {
+        path: '',
+        name: 'Manage',
+        beforeEnter: isLoggedIn,
+      },
+      {
+        path: 'users',
+        name: 'users',
+        component: Users,
+        meta: {
+          breadcrumb: [
+            { name: 'Home', link: '/dashboard' },
+            { name: 'Manage', link: '/manage' },
+            { name: 'Users', link: '/users' },
+          ],
+        },
+      },
+      {
+        path: 'notifications',
+        name: 'notifications',
+        component: Notifications,
+        meta: {
+          breadcrumb: [
+            { name: 'Home', link: '/dashboard' },
+            { name: 'Manage', link: '/manage' },
+            { name: 'Notifications', link: '/notifications' },
+          ],
+        },
+      },
+      {
+        path: 'logs',
+        name: 'logs',
+        component: Logs,
+        meta: {
+          breadcrumb: [
+            { name: 'Home', link: '/dashboard' },
+            { name: 'Manage', link: '/manage' },
+            { name: 'Logs', link: '/Logs' },
+          ],
+        },
+      },
     ],
     meta: {
       breadcrumb: [
@@ -87,7 +123,7 @@ const routes = [
   },
   {
     path: '/camera',
-    name: 'Camera',
+    name: 'camera',
     component: Camera,
     beforeEnter: isLoggedIn,
     meta: {
@@ -99,13 +135,25 @@ const routes = [
   },
   {
     path: '/charts',
-    name: 'Charts',
+    name: 'charts',
     component: Charts,
     beforeEnter: isLoggedIn,
     meta: {
       breadcrumb: [
         { name: 'Home', link: '/dashboard' },
         { name: 'Charts', link: '/charts' },
+      ],
+    },
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: Account,
+    beforeEnter: isLoggedIn,
+    meta: {
+      breadcrumb: [
+        { name: 'Home', link: '/dashboard' },
+        { name: 'account', link: '/account' },
       ],
     },
   },

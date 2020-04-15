@@ -12,6 +12,9 @@ module.exports = function (app) {
       displayName: { type: String, unique: true, required: true },
       imageUrl: { type: String, required: true },
       role: { type: String, required: true, default: 'Member' },
+      email: { type: String, required: true },
+      phone: { type: String, required: true },
+      darkMode: { type: Boolean, required: true, default: false },
     },
     {
       timestamps: true,
