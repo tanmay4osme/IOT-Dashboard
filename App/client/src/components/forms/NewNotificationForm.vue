@@ -28,21 +28,7 @@
 
 <script>
   /* eslint-disable */
-  import { required, alpha_spaces } from 'vee-validate/dist/rules';
-  import { extend, setInteractionMode } from 'vee-validate';
-
-  setInteractionMode('aggressive');
-
-  extend('required', {
-    ...required,
-    message: '{_field_} can not be empty!',
-  });
-
-  extend('alpha_spaces', {
-    ...alpha_spaces,
-    message: '{_field_} may contain alphabetic characters or spaces.',
-  });
-
+  import "./Rules/index";
 
 export default {
     props: ['creating', 'createNotification', 'showing'],

@@ -2,7 +2,7 @@
 
 - [ ] Create database model
 - [ ] Create pasword reset service
-- [ ] Update Breadcrumbs in navigation
+- [x] Update Breadcrumbs in navigation
 - [ ] Add light/dark theme toggler
   - [ ] create dark theme
   - [ ] create light theme
@@ -16,7 +16,7 @@
   - [ ] protect routes from manually entering url (manage route)
 - [ ] Make avatar changeable by clicking
   - [ ] upload image on server instead of url
-- [ ] Ability to remove a notification
+- [x] Ability to remove a notification
 - [x] Add tooltips on icons in menu bar
 - [ ] Refactor components
 - [ ] Create form validation
@@ -54,5 +54,5 @@
             - Role
                - [ ] Not empty
         - [ ] Fix bug create when fields are init empty
-- [ ] Error reporting
+- [ ] Error / success reporting
    

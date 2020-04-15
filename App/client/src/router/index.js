@@ -72,10 +72,47 @@ const routes = [
     },
     beforeEnter: isLoggedIn,
     children: [
-      { path: '', name: 'Manage', beforeEnter: isLoggedIn },
-      { path: 'users', name: 'users', component: Users },
-      { path: 'notifications', name: 'notifications', component: Notifications },
-      { path: 'logs', name: 'logs', component: Logs },
+      {
+        path: '',
+        name: 'Manage',
+        beforeEnter: isLoggedIn,
+      },
+      {
+        path: 'users',
+        name: 'users',
+        component: Users,
+        meta: {
+          breadcrumb: [
+            { name: 'Home', link: '/dashboard' },
+            { name: 'Manage', link: '/manage' },
+            { name: 'Users', link: '/users' },
+          ],
+        },
+      },
+      {
+        path: 'notifications',
+        name: 'notifications',
+        component: Notifications,
+        meta: {
+          breadcrumb: [
+            { name: 'Home', link: '/dashboard' },
+            { name: 'Manage', link: '/manage' },
+            { name: 'Notifications', link: '/notifications' },
+          ],
+        },
+      },
+      {
+        path: 'logs',
+        name: 'logs',
+        component: Logs,
+        meta: {
+          breadcrumb: [
+            { name: 'Home', link: '/dashboard' },
+            { name: 'Manage', link: '/manage' },
+            { name: 'Logs', link: '/Logs' },
+          ],
+        },
+      },
     ],
     meta: {
       breadcrumb: [

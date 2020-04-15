@@ -55,42 +55,7 @@
 
 <script>
   /* eslint-disable */
-  import { required, email, max, alpha_num, alpha_spaces, confirmed } from 'vee-validate/dist/rules';
-  import { extend, setInteractionMode } from 'vee-validate';
-
-  setInteractionMode('aggressive');
-
-  extend('alpha_num', {
-    ...alpha_num,
-    message: '{_field_} may contain alphabetic characters or numbers.',
-  });
-
-  extend('required', {
-    ...required,
-    message: '{_field_} can not be empty',
-  });
-
-  extend('confirmed', {
-    ...confirmed,
-    message: 'passwords must match',
-  });
-
-
-  extend('max', {
-    ...max,
-    message: '{_field_} may not be greater than {length} characters',
-  });
-
-  extend('alpha_spaces', {
-    ...alpha_spaces,
-    message: '{_field_} may contain alphabetic characters, numbers and spaces',
-  });
-
-  extend('email', {
-    ...email,
-    message: 'Email must be valid',
-  });
-
+  import "./Rules/index";
   export default {
     name: 'NewUserForm',
     props: ['creating', 'createUser', 'showing'],
