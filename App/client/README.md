@@ -4,11 +4,12 @@
 - [ ] Create pasword reset service
 - [x] Update Breadcrumbs in navigation
 - [ ] Add light/dark theme toggler
-  - [ ] create dark theme
-  - [ ] create light theme
+  - [x] create dark theme
+  - [x] create light theme
+  - [ ] Store setting in database
 - [ ] Add loading animations for
   - [ ] Initial loading of the webpage (spinner/ progress bar)
-  - [ ] loading of individiual components
+  - [x] loading of individiual components
   - [ ] skeleton loaders
 - [ ] Better security for
   - [ ] admin / member roles

@@ -22,6 +22,7 @@
     "core-js": "^3.6.4",
     "feathers-hooks-common": "^5.0.2",
     "feathers-vuex": "^3.9.1",
+    "nprogress": "^0.2.0",
     "socket.io-client": "^2.3.0",
     "vee-validate": "^3.2.5",
     "vue": "^2.6.11",

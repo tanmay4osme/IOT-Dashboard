@@ -1,16 +1,16 @@
 <template>
   <v-app>
-    <app-tool-bar :user="user" :logout="logout" :navigator="navigator"></app-tool-bar>
-    <app-nav-bar :user="user" :navigator="navigator"></app-nav-bar>
+      <app-tool-bar :user="user" :logout="logout" :navigator="navigator"></app-tool-bar>
+      <app-nav-bar :user="user" :navigator="navigator"></app-nav-bar>
 
-    <v-content :class="$vuetify.theme.isDark ? '' : 'grey lighten-2'">
-      <app-breadcrumbs></app-breadcrumbs>
-      <app-notifications></app-notifications>
-      <router-view/>
-    </v-content>
-    <v-footer app fixed inset>
-      <span>&copy; 2020</span>
-    </v-footer>
+      <v-content :class="$vuetify.theme.isDark ? '' : 'grey lighten-2'">
+        <app-breadcrumbs></app-breadcrumbs>
+        <app-notifications></app-notifications>
+        <router-view/>
+      </v-content>
+      <v-footer app fixed inset>
+        <span>&copy; 2020</span>
+      </v-footer>
   </v-app>
 </template>
 
@@ -33,7 +33,9 @@
       navigator: {
         show: false,
       },
+      isLoading: false,
     }),
+
     computed: {
       ...mapState('auth', { user: 'user' }),
     },

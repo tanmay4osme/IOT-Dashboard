@@ -14,7 +14,14 @@ import Logs from '../views/Manage/Logs.vue';
 import Account from '../views/Account.vue';
 import store from '../store/index';
 
+import '../assets/css/nprogress.css';
+import NProgress from "nprogress";
+
 Vue.use(VueRouter);
+
+// NProgress.configure({parent: '.v-content__wrap'});
+NProgress.configure({parent: '.breadcrumb'});
+NProgress.configure({ showSpinner: false });
 
 const isLoggedIn = (to, from, next) => {
   store
@@ -164,5 +171,21 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeResolve((to, from, next) => {
+  // If this isn't an initial page load.
+  if (to.name) {
+    // Start the route progress bar.
+    NProgress.start();
+  }
+  next();
+})
+
+router.afterEach((to, from) => {
+  // Complete the animation of the route progress bar.
+  NProgress.done();
+})
+
+
 
 export default router;
