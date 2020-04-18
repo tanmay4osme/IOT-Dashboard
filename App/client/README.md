@@ -56,4 +56,6 @@
                - [ ] Not empty
         - [ ] Fix bug create when fields are init empty
 - [ ] Error / success reporting
+- [ ] Write tests
+
    

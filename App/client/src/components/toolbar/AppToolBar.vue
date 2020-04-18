@@ -1,18 +1,19 @@
 <template>
-  <v-app-bar app flat color="primary">
-    <div class="d-flex align-center" v-if="user">
-      <v-app-bar-nav-icon class="white--text" @click.stop="navigator.show = !navigator.show"></v-app-bar-nav-icon>
-      <v-autocomplete class="mx-4 white--text" hide-details hide-no-data label="Search here" filled />
+  <v-app-bar app color="primary" flat>
+    <div class="d-flex align-center">
+      <v-app-bar-nav-icon @click.stop="navigator.show = !navigator.show" class="white--text"></v-app-bar-nav-icon>
+      <v-autocomplete class="mx-4 white--text" filled hide-details hide-no-data label="Search here"/>
     </div>
 
     <v-spacer></v-spacer>
-    <div class="controls" v-if="user">
+
+    <div class="controls">
       <v-menu :close-on-content-click="false" :nudge-width="200" offset-y v-model="menu">
         <template v-slot:activator="{ on: menu }">
           <v-badge :content="1" :value="1" class="hover mx-3" color="red" overlap>
             <v-tooltip bottom>
               <template v-slot:activator="{ on: tooltip }">
-                <v-icon class="white--text" v-on="{...tooltip, ...menu}">mdi-bell</v-icon>
+                <v-icon class="white--text" v-on="{ ...tooltip, ...menu }">mdi-bell</v-icon>
               </template>
               <span>Notifications</span>
             </v-tooltip>
@@ -43,8 +44,12 @@
       </v-menu>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-icon v-if="!$vuetify.theme.dark" @click="$vuetify.theme.dark = ! $vuetify.theme.dark" class="white--text hover mx-3" v-on="on">mdi-brightness-3</v-icon>
-          <v-icon v-else @click="toggleDarkMode()" class="white--texthover mx-3" v-on="on">{{mdiWhiteBalanceSunny}}</v-icon>
+          <v-icon @click="$vuetify.theme.dark = !$vuetify.theme.dark" class="white--text hover mx-3" v-if="!$vuetify.theme.dark" v-on="on">
+            mdi-brightness-3
+          </v-icon>
+          <v-icon @click="toggleDarkMode()" class="white--texthover mx-3" v-else v-on="on">
+            {{ mdiWhiteBalanceSunny }}
+          </v-icon>
         </template>
         <span>Toggle Dark mode</span>
       </v-tooltip>
@@ -61,13 +66,9 @@
 <script>
   /* eslint-disable */
   import { mdiWhiteBalanceSunny } from '@mdi/js';
-  import { mapActions } from 'vuex';
 
   export default {
     props: {
-      user: {
-        type: Object,
-      },
       logout: {
         type: Function,
       },
@@ -88,14 +89,11 @@
           //update user
         },
         immediate: true,
-      }
+      },
     },
-
     methods: {
-      ...mapActions('users', ['update']),
-
       toggleDarkMode() {
-        this.$vuetify.theme.dark = ! this.$vuetify.theme.dark;
+        this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
       },
     },
   };

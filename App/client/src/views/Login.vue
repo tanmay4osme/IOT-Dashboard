@@ -1,49 +1,39 @@
 <!-- eslint-disable -->
 <template>
-  <v-slide-y-transition mode="out-in">
-    <v-container fluid>
-      <v-row align="center" justify="center">
-        <v-col cols="8">
-          <v-card class="mx-auto my-auto pa-10" max-width="344" outlined>
-            <ValidationObserver ref="observer">
-              <v-form @keydown.prevent.enter @submit.prevent="login({ valid, user })" v-model="valid">
-                <h3 class="mb-10"> Welcome back! <br/>  Log in to your account. </h3>
+  <v-container class="pa-0 ma-0" fluid>
+    <v-row align="center" class="pa-0 ma-0" justify="center">
+      <v-col class="carousel-wrapper pa-0 ma-0" cols="6">
+        <v-carousel :show-arrows="false" class="fill-height" cycle height="100vh"
+                    hide-delimiter-background hide-delimiters>
+          <v-carousel-item :key="i" :src="slide" v-for="(slide, i) in slides">
 
-                <ValidationProvider v-slot="{ errors }" name="Username" rules="required|alpha_num">
-                  <v-text-field label="Username" outlined required v-model="user.username" :error-messages="errors"/>
-                </ValidationProvider>
+          </v-carousel-item>
+        </v-carousel>
+      </v-col>
+      <v-col cols="6">
+        <v-card id="login-card" class="ma-auto pa-10" elevation="10" max-width="455" outlined>
+          <ValidationObserver ref="observer">
+            <v-form @keydown.prevent.enter @submit.prevent="login({ valid, user })"
+                    v-model="valid">
+              <h3 class="mb-10"> Welcome back! <br/> Log in to your account. </h3>
 
-                <ValidationProvider v-slot="{ errors }" name="Password" rules="required">
-                  <v-text-field label="Password" outlined required type="password" v-model="user.password" :error-messages="errors"/>
-                </ValidationProvider>
+              <v-text-field label="Username" outlined required v-model="user.username"/>
 
-                <v-btn :disabled="!valid" type="submit">Login</v-btn>
-              </v-form>
-            </ValidationObserver>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-slide-y-transition>
+              <v-text-field label="Password" outlined required type="password"
+                            v-model="user.password"/>
+
+              <v-btn :disabled="!valid" type="submit">Login</v-btn>
+            </v-form>
+          </ValidationObserver>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
   /* eslint-disable */
   import { mapActions, mapState } from 'vuex';
-  import { required, alpha_num } from 'vee-validate/dist/rules';
-  import { extend, setInteractionMode } from 'vee-validate';
-
-  setInteractionMode('aggressive');
-
-  extend('required', {
-    ...required,
-    message: '{_field_} can not be empty!',
-  });
-
-  extend('alpha_num', {
-    ...alpha_num,
-    message: '{_field_} may only contain alpha-numeric characters!',
-  });
 
   export default {
     name: 'Login',
@@ -54,13 +44,27 @@
           username: '',
           password: '',
         },
+        slides: [
+          'https://source.unsplash.com/collection/190727/',
+          'https://source.unsplash.com/collection/190728/',
+          'https://source.unsplash.com/collection/190726/',
+          'https://source.unsplash.com/collection/190725/',
+          'https://source.unsplash.com/collection/190723/',
+        ],
       };
     },
     computed: {
-      ...mapState('users', { loading: 'isAuthenticatePending' })
+      ...mapState('users', { loading: 'isAuthenticatePending' }),
     },
     methods: {
       ...mapActions('localAuth', ['login']),
     },
   };
 </script>
+
+<style>
+  .carousel-wrapper {
+    height: 100vh !important;
+  }
+
+</style>

@@ -1,5 +1,5 @@
 import feathersVuex from 'feathers-vuex';
-import feathersClient from '../feathers-client';
+import feathersClient from '../../feathers-client';
 
 /* eslint-disable object-curly-newline */
 // Setting up feathers-vuex

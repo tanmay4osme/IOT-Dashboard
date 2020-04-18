@@ -4,8 +4,7 @@
       <v-col cols="10">
         <FeathersVuexFind :query="{ status: true }" service="notifications" watch="query">
           <div slot-scope="props">
-            <v-alert :key="item.id" :type="item.type" border="left" dense
-                     v-for="item in props.items">{{ item.text }}
+            <v-alert :key="item.id" :type="item.type" border="left" dense v-for="item in props.items">{{ item.text }}
             </v-alert>
           </div>
         </FeathersVuexFind>
