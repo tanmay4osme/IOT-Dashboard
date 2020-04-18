@@ -1,7 +1,7 @@
 // src/store/services/users.js
 /*eslint-disable */
 import feathersClient from '../../feathers-client';
-import feathersVuex from '../feathersVuex';
+import feathersVuex from '../feathers/feathersVuex';
 
 const { makeServicePlugin, BaseModel } = feathersVuex;
 

@@ -1,20 +1,4 @@
 /* eslint-disable */
-
-const userTable = {
-  displayAmount: 5,
-  sortBy: 'createdAt',
-  sortDesc: true,
-  headers: [
-    { text: 'UID', value: '_id', sortable: false },
-    { text: 'Username', value: 'username', sortable: false },
-    { text: 'Role', value: 'role', sortable: false },
-    { text: 'Display name', value: 'displayName', sortable: false },
-    { text: 'Profile picture URL', value: 'imageUrl', sortable: false },
-    { text: 'Created at', value: 'createdAt', sortable: true },
-    { text: 'Remove user', value: 'actions', sortable: false },
-  ],
-};
-
 const logTable = {
   displayAmount: 15,
   sortBy: 'createdAt',
@@ -36,4 +20,4 @@ const notificationTable = {
   ],
 };
 
-export { userTable, logTable, notificationTable };
+export { logTable, notificationTable };

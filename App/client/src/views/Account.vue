@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-snackbar :color="snackbar.color" :timeout="snackbar.timeout" right top
-                v-model="snackbar.show">{{ snackbar.text }}
+    <v-snackbar :color="snackbar.color" :timeout="snackbar.timeout" right top  v-model="snackbar.show">
+      {{ snackbar.text }}
     </v-snackbar>
     <v-row>
       <v-col cols="12">
@@ -50,10 +50,8 @@
             <v-row justify="center">
               <v-col class="mt-5" cols="9">
                 <v-form v-model="valid">
-                  <v-text-field label="New password" outlined required
-                                type="password"></v-text-field>
-                  <v-text-field label="Confirm new password" outlined required
-                                type="password"></v-text-field>
+                  <v-text-field label="New password" outlined required type="password"></v-text-field>
+                  <v-text-field label="Confirm new password" outlined required type="password"></v-text-field>
                   <v-btn color="orange" type="submit">Update</v-btn>
                   <v-btn @click="resetForm" class="ml-3" color="red">reset</v-btn>
                 </v-form>

@@ -1,10 +1,9 @@
-// src/store/index.js
-/* eslint-disable */
+/* eslint-disable import/no-cycle */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import auth from './store.auth';
+import auth from './feathers/store.auth';
 import localAuth from './modules/localAuth';
-import feathersVuex from './feathersVuex';
+import feathersVuex from './feathers/feathersVuex';
 
 const { FeathersVuex } = feathersVuex;
 
@@ -17,6 +16,7 @@ const servicePlugins = requireModule.keys().map((modulePath) => requireModule(mo
 export default new Vuex.Store({
   modules: { localAuth },
   state: {},
+  getters: {},
   mutations: {},
   actions: {},
   plugins: [auth, ...servicePlugins],

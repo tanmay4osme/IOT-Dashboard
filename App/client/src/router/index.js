@@ -1,20 +1,16 @@
 /* eslint-disable */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
-import Camera from '../views/Camera.vue';
-import Charts from '../views/Charts.vue';
-import Dashboard from '../views/Dashboard.vue';
-import Home from '../views/Home.vue';
-import Login from '../views/Login.vue';
-
-import Users from '../views/Manage/Users.vue';
-import Notifications from '../views/Manage/Notifications.vue';
-import Logs from '../views/Manage/Logs.vue';
-import Account from '../views/Account.vue';
 import store from '../store/index';
 
+import '../assets/css/nprogress.css';
+import NProgress from 'nprogress';
+
 Vue.use(VueRouter);
+
+// NProgress.configure({parent: '.v-content__wrap'});
+NProgress.configure({ parent: '.breadcrumb' });
+NProgress.configure({ showSpinner: false });
 
 const isLoggedIn = (to, from, next) => {
   store
@@ -31,7 +27,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import(/* webpackChunkName:"Home" */ '../views/Home'),
     meta: {
       breadcrumb: [{ name: 'Home', link: '/' }],
     },
@@ -49,12 +45,12 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login,
+    component: () => import(/* webpackChunkName:"Login" */ '../views/Login'),
   },
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: Dashboard,
+    component: () => import(/* webpackChunkName:"Dashboard" */'../views/Dashboard'),
     beforeEnter: isLoggedIn,
     meta: {
       breadcrumb: [
@@ -80,7 +76,7 @@ const routes = [
       {
         path: 'users',
         name: 'users',
-        component: Users,
+        component: () => import(/* webpackChunkName:"Users" */ '../views/Manage/Users'),
         meta: {
           breadcrumb: [
             { name: 'Home', link: '/dashboard' },
@@ -92,7 +88,7 @@ const routes = [
       {
         path: 'notifications',
         name: 'notifications',
-        component: Notifications,
+        component: () => import(/* webpackChunkName:"Notifications" */ '../views/Manage/Notifications'),
         meta: {
           breadcrumb: [
             { name: 'Home', link: '/dashboard' },
@@ -104,7 +100,7 @@ const routes = [
       {
         path: 'logs',
         name: 'logs',
-        component: Logs,
+        component: () => import(/* webpackChunkName:"Logs" */'../views/Manage/Logs'),
         meta: {
           breadcrumb: [
             { name: 'Home', link: '/dashboard' },
@@ -124,7 +120,7 @@ const routes = [
   {
     path: '/camera',
     name: 'camera',
-    component: Camera,
+    component: () => import(/* webpackChunkName:"Camera" */ '../views/Camera'),
     beforeEnter: isLoggedIn,
     meta: {
       breadcrumb: [
@@ -136,7 +132,7 @@ const routes = [
   {
     path: '/charts',
     name: 'charts',
-    component: Charts,
+    component: () => import(/* webpackChunkName:"Charts" */ '../views/Charts'),
     beforeEnter: isLoggedIn,
     meta: {
       breadcrumb: [
@@ -148,7 +144,7 @@ const routes = [
   {
     path: '/account',
     name: 'account',
-    component: Account,
+    component: () => import(/* webpackChunkName:"Account" */ '../views/Account'),
     beforeEnter: isLoggedIn,
     meta: {
       breadcrumb: [
@@ -164,5 +160,20 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeResolve((to, from, next) => {
+  // If this isn't an initial page load.
+  if (to.name) {
+    // Start the route progress bar.
+    NProgress.start();
+  }
+  next();
+});
+
+router.afterEach((to, from) => {
+  // Complete the animation of the route progress bar.
+  NProgress.done();
+});
+
 
 export default router;

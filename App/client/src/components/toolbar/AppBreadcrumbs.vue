@@ -1,8 +1,8 @@
 <template>
   <div class="elevation-15 breadcrumb primary">
-    <v-breadcrumbs  :items="breadcrumbList">
+    <v-breadcrumbs :items="breadcrumbList">
       <template v-slot:item="{ item }">
-        <v-breadcrumbs-item class="app-white-text" :disabled="item.disabled" :href="item.link">
+        <v-breadcrumbs-item :disabled="item.disabled" :href="item.link" class="app-white-text">
           {{ item.name.toUpperCase() }}
         </v-breadcrumbs-item>
       </template>
@@ -33,13 +33,15 @@
     width: 100vw;
     z-index: 1;
   }
+
   .v-breadcrumbs__divider {
     color: white !important;
   }
+
   .app-white-text {
     & a {
       color: white !important;
-     }
+    }
   }
 
 </style>

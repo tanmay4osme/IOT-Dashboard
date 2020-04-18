@@ -1,8 +1,8 @@
 <!-- eslint-disable -->
 <template>
-  <v-navigation-drawer :color="$vuetify.theme.isDark ? 'primary' : 'white'" v-if="user" :expand-on-hover.sync="!navigator.show" :mini-variant.sync="!navigator.show" app permanent v-model="navigator.show">
+  <v-navigation-drawer :color="$vuetify.theme.isDark ? 'primary' : 'white'" :expand-on-hover.sync="!navigator.show" :mini-variant.sync="!navigator.show" app permanent v-model="navigator.show">
     <v-list class="py-0" dense nav>
-      <app-avatar :user="user"></app-avatar>
+      <app-avatar></app-avatar>
 
       <v-divider class="mb-2"></v-divider>
 
@@ -85,9 +85,6 @@
 
   export default {
     props: {
-      user: {
-        type: Object,
-      },
       navigator: {
         type: Object,
       },
@@ -100,11 +97,6 @@
       return {
         menu: false,
       };
-    },
-    methods: {
-      toggleDarkMode() {
-        console.log('toggle');
-      },
     },
   };
 </script>

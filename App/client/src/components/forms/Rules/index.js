@@ -1,5 +1,13 @@
-/* eslint-disable */
-import { required, alpha_spaces, alpha_num, confirmed, max, email } from 'vee-validate/dist/rules';
+/* eslint-disable camelcase */
+import {
+  required,
+  alpha_spaces,
+  alpha_num,
+  confirmed,
+  max,
+  email,
+} from 'vee-validate/dist/rules';
+
 import { extend, setInteractionMode } from 'vee-validate';
 
 setInteractionMode('aggressive');
