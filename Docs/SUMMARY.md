@@ -22,5 +22,5 @@
 
 ## Dashboard <a id="features"></a>
 
-* [Untitled](features/untitled.md)
+* [Create a new user](features/untitled.md)
 
