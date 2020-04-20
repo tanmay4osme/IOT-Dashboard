@@ -6,6 +6,8 @@ import {
   confirmed,
   max,
   email,
+  min,
+
 } from 'vee-validate/dist/rules';
 
 import { extend, setInteractionMode } from 'vee-validate';
@@ -24,7 +26,7 @@ extend('alpha_spaces', {
 
 extend('alpha_num', {
   ...alpha_num,
-  message: '{_field_} may contain alphabetic characters or numbers.',
+  message: '{_field_} may only contain alphabetic characters or numbers.',
 });
 
 extend('confirmed', {
@@ -41,3 +43,18 @@ extend('email', {
   ...email,
   message: 'Email must be valid',
 });
+
+extend('min', {
+  ...min,
+  message: '{_field_} must be at least {length} characters',
+});
+
+export {
+  required,
+  alpha_spaces,
+  alpha_num,
+  confirmed,
+  max,
+  email,
+  min,
+};

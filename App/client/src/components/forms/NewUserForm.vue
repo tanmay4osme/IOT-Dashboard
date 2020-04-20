@@ -1,22 +1,22 @@
 <template>
-  <!-- Create a new user -->
+  <!-- eslint-disable -->
   <v-row justify="center">
     <v-dialog max-width="500" persistent v-model="dialog">
       <v-card>
         <v-card-title class="headline mb-5">Create a new user</v-card-title>
         <v-card-text>
-          <ValidationObserver ref="observer" v-slot="{ }">
+          <ValidationObserver ref="observer" v-slot="{ validate, reset }">
             <v-form @keydown.prevent.enter @submit.prevent="onCreateUser" v-model="valid">
-              <ValidationProvider v-slot="{ errors }" name="Username" rules="required" >
+              <ValidationProvider v-slot="{ errors }" name="Username" rules="required|min:3|max:15|alpha_num" >
                 <v-text-field label="Username" outlined required :counter="15" v-model="user.username" :error-messages="errors"/>
               </ValidationProvider>
 
-              <ValidationProvider v-slot="{ errors }" name="Display Name" rules="required">
+              <ValidationProvider v-slot="{ errors }" name="Display Name" rules="required|min:3|max:20|alpha_spaces">
                 <v-text-field label="Display Name" outlined required :counter="20" v-model="user.displayName" :error-messages="errors"/>
               </ValidationProvider>
 
               <ValidationObserver>
-                <ValidationProvider rules="confirmed:confirmation" v-slot="{ errors }">
+                <ValidationProvider name="Password" rules="confirmed:confirmation|required" v-slot="{ errors }">
                   <v-text-field label="Password" outlined required type="password" v-model="user.password" :error-messages="errors"/>
                 </ValidationProvider>
 
@@ -29,7 +29,7 @@
                 <v-text-field label="Profile picture URL" outlined required v-model="user.imageUrl" :error-messages="errors"/>
               </ValidationProvider>
 
-              <ValidationProvider v-slot="{ errors }" name="Email" rules="required">
+              <ValidationProvider v-slot="{ errors }" name="Email" rules="required|email">
                 <v-text-field label="Email" outlined required v-model="user.email" :error-messages="errors"/>
               </ValidationProvider>
 
@@ -55,7 +55,7 @@
 
 <script>
   /* eslint-disable */
-  import "./Rules/index";
+  import { required, min,max, alpha_num, email } from "./Rules/index";
   export default {
     name: 'NewUserForm',
     props: ['creating', 'createUser', 'showing'],
@@ -88,15 +88,10 @@
     },
     methods: {
       async onCreateUser() {
-        if (this.valid) {
+        const isValid = await this.$refs.observer.validate();
+        if (isValid) {
           await this.createUser(this.user);
-          this.user = {
-            username: '',
-            password: '',
-            displayName: '',
-            imageUrl: '',
-            role: '',
-          };
+          this.$refs.observer.reset();
         }
       },
     },

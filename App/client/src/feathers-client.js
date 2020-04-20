@@ -16,4 +16,5 @@ const feathersClient = feathers()
     },
   });
 
+export { socket };
 export default feathersClient;
