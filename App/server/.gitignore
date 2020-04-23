@@ -1,6 +1,7 @@
 # Logs
 logs
 *.log
+docker-data/
 
 # Runtime data
 pids
