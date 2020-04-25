@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/JensVanhulst/IOT-Dashboard" target="_blank" rel="noopener noreferrer">
-    <img width="100" src="/App/client/public/favicon.ico" alt="IOT dashboard">
+    <img width="100" src="/App/client/public/" alt="IOT dashboard">
   </a>
 </p>
 
