@@ -52,14 +52,14 @@
     "feathers-mongoose": "^8.3.0",
     "helmet": "^3.22.0",
     "mongodb-core": "^3.2.7",
-    "mongoose": "^5.9.9",
+    "mongoose": "^5.9.10",
     "serve-favicon": "^2.5.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
     "axios": "^0.19.2",
     "eslint": "^6.8.0",
-    "jest": "^25.3.0",
+    "jest": "^25.4.0",
     "nodemon": "^2.0.3"
   },
   "config": {

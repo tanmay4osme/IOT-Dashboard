@@ -7,11 +7,11 @@
           <ValidationObserver ref="notificationObserver">
             <v-form @keydown.prevent.enter @submit.prevent="onCreateNotification" v-model="valid">
 
-              <ValidationProvider v-slot="{ errors }" name="Text" rules="required|alpha_spaces">
+              <ValidationProvider v-slot="{ errors }" name="Text message" rules="required">
                 <v-text-field label="Text" outlined required v-model="notification.text" :error-messages="errors"/>
               </ValidationProvider>
 
-              <ValidationProvider v-slot="{ errors }" name="Text" rules="required">
+              <ValidationProvider v-slot="{ errors }" name="Type" rules="required">
                 <v-select :items="types" label="Type selection" outlined required v-model="notification.type" :error-messages="errors"></v-select>
               </ValidationProvider>
               <v-switch :label="`Status:  ${notification.status}`" v-model="notification.status"></v-switch>
@@ -28,7 +28,7 @@
 
 <script>
   /* eslint-disable */
-  import "./Rules/index";
+  import { required, alpha_spaces } from "./Rules/index";
 
 export default {
     props: ['creating', 'createNotification', 'showing'],
