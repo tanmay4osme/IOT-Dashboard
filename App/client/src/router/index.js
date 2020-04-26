@@ -1,17 +1,16 @@
 /* eslint-disable */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
-import Camera from '../views/Camera.vue';
-import Charts from '../views/Charts.vue';
-import Dashboard from '../views/Dashboard.vue';
-import Home from '../views/Home.vue';
-import Login from '../views/Login.vue';
-import Manage from '../views/Manage.vue';
-
 import store from '../store/index';
 
+import '../assets/css/nprogress.css';
+import NProgress from 'nprogress';
+
 Vue.use(VueRouter);
+
+// NProgress.configure({parent: '.v-content__wrap'});
+NProgress.configure({ parent: '.breadcrumb' });
+NProgress.configure({ showSpinner: false });
 
 const isLoggedIn = (to, from, next) => {
   store
@@ -28,7 +27,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import(/* webpackChunkName:"Home" */ '../views/Home'),
+    meta: {
+      breadcrumb: [{ name: 'Home', link: '/' }],
+    },
     beforeEnter(to, from, next) {
       store
         .dispatch('auth/authenticate')
@@ -43,31 +45,113 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login,
+    component: () => import(/* webpackChunkName:"Login" */ '../views/Login'),
   },
   {
     path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard,
+    name: 'dashboard',
+    component: () => import(/* webpackChunkName:"Dashboard" */'../views/Dashboard'),
     beforeEnter: isLoggedIn,
+    meta: {
+      breadcrumb: [
+        { name: 'Home', link: '/dashboard' },
+        { name: 'Dashboard', link: '/dashboard' },
+      ],
+    },
   },
   {
     path: '/manage',
-    name: 'Manage',
-    component: Manage,
+    component: {
+      render(c) {
+        return c('router-view');
+      },
+    },
     beforeEnter: isLoggedIn,
+    children: [
+      {
+        path: '',
+        name: 'Manage',
+        beforeEnter: isLoggedIn,
+      },
+      {
+        path: 'users',
+        name: 'users',
+        component: () => import(/* webpackChunkName:"Users" */ '../views/Manage/Users'),
+        meta: {
+          breadcrumb: [
+            { name: 'Home', link: '/dashboard' },
+            { name: 'Manage', link: '/manage' },
+            { name: 'Users', link: '/users' },
+          ],
+        },
+      },
+      {
+        path: 'notifications',
+        name: 'notifications',
+        component: () => import(/* webpackChunkName:"Notifications" */ '../views/Manage/Notifications'),
+        meta: {
+          breadcrumb: [
+            { name: 'Home', link: '/dashboard' },
+            { name: 'Manage', link: '/manage' },
+            { name: 'Notifications', link: '/notifications' },
+          ],
+        },
+      },
+      {
+        path: 'logs',
+        name: 'logs',
+        component: () => import(/* webpackChunkName:"Logs" */'../views/Manage/Logs'),
+        meta: {
+          breadcrumb: [
+            { name: 'Home', link: '/dashboard' },
+            { name: 'Manage', link: '/manage' },
+            { name: 'Logs', link: '/Logs' },
+          ],
+        },
+      },
+    ],
+    meta: {
+      breadcrumb: [
+        { name: 'Home', link: '/dashboard' },
+        { name: 'manage', link: '/manage' },
+      ],
+    },
   },
   {
     path: '/camera',
-    name: 'Camera',
-    component: Camera,
+    name: 'camera',
+    component: () => import(/* webpackChunkName:"Camera" */ '../views/Camera'),
     beforeEnter: isLoggedIn,
+    meta: {
+      breadcrumb: [
+        { name: 'Home', link: '/dashboard' },
+        { name: 'Camera', link: '/camera' },
+      ],
+    },
   },
   {
     path: '/charts',
-    name: 'Charts',
-    component: Charts,
+    name: 'charts',
+    component: () => import(/* webpackChunkName:"Charts" */ '../views/Charts'),
     beforeEnter: isLoggedIn,
+    meta: {
+      breadcrumb: [
+        { name: 'Home', link: '/dashboard' },
+        { name: 'Charts', link: '/charts' },
+      ],
+    },
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import(/* webpackChunkName:"Account" */ '../views/Account'),
+    beforeEnter: isLoggedIn,
+    meta: {
+      breadcrumb: [
+        { name: 'Home', link: '/dashboard' },
+        { name: 'account', link: '/account' },
+      ],
+    },
   },
 ];
 
@@ -76,5 +160,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
 
 export default router;

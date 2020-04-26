@@ -1,5 +1,5 @@
 <template>
-  <v-list-item two-line class="px-0">
+  <v-list-item class="px-0" two-line>
     <v-list-item-avatar>
       <img :src="user.imageUrl" alt="user image" />
     </v-list-item-avatar>
@@ -12,7 +12,11 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
+
 export default {
-  props: ['user'],
+  computed: {
+    ...mapState('auth', { user: 'user' }),
+  },
 };
 </script>

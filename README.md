@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/JensVanhulst/IOT-Dashboard" target="_blank" rel="noopener noreferrer">
-    <img width="100" src="/App/website/public/android-chrome-512x512.png" alt="Vue logo">
+    <img width="100" src="/App/client/public/" alt="IOT dashboard">
   </a>
 </p>
 
@@ -10,11 +10,11 @@
   </a>
 
   <a href="https://github.com/JensVanhulst/IOT-Dashboard/network/dependencies">
-    <img alt="David (path)" src="https://img.shields.io/david/JensVanhulst/IOT-Dashboard?label=Website%20dependencies&path=App%2Fwebsite&style=for-the-badge">
+    <img alt="David (path)" src="https://img.shields.io/david/JensVanhulst/IOT-Dashboard?label=Website%20dependencies&path=App%2Fclient&style=for-the-badge">
   </a>
 
   <a href="https://github.com/JensVanhulst/IOT-Dashboard/network/dependencies">
-    <img alt="David (path)" src="https://img.shields.io/david/JensVanhulst/IOT-Dashboard?label=Server%20dependencies&path=App&style=for-the-badge">
+    <img alt="David (path)" src="https://img.shields.io/david/JensVanhulst/IOT-Dashboard?label=Server%20dependencies&path=App%2Fserver&style=for-the-badge">
   </a>
 
   <a href="https://github.com/JensVanhulst/IOT-Dashboard/releases">

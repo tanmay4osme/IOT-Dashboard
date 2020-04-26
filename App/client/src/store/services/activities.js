@@ -1,15 +1,18 @@
 // src/store/services/users.js
 /*eslint-disable */
 import feathersClient from '../../feathers-client';
-import feathersVuex from '../feathersVuex';
+import feathersVuex from '../feathers/feathersVuex';
 
 const { makeServicePlugin, BaseModel } = feathersVuex;
+
 class Activity extends BaseModel {
+  // Required for $FeathersVuex plugin to work after production transpile.
+  static modelName = 'Activity';
+
   constructor(data, options) {
     super(data, options);
   }
-  // Required for $FeathersVuex plugin to work after production transpile.
-  static modelName = 'Activity';
+
   // Define default properties here
   static instanceDefaults() {
     return {
@@ -17,6 +20,7 @@ class Activity extends BaseModel {
     };
   }
 }
+
 const servicePath = 'activities';
 const servicePlugin = makeServicePlugin({
   Model: Activity,

@@ -1,61 +1,112 @@
+<!-- eslint-disable -->
 <template>
-  <div>
-    <v-app-bar app color="primary" dark :clipped-left="true">
-      <div v-if="user" class="d-flex align-center">
-        <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>-->
-        <h3>{{ $route.name }}</h3>
-      </div>
+  <v-navigation-drawer :color="$vuetify.theme.isDark ? 'primary' : 'white'" :expand-on-hover.sync="!navigator.show" :mini-variant.sync="!navigator.show" app permanent v-model="navigator.show">
+    <v-list class="py-0" dense nav>
+      <app-avatar></app-avatar>
 
-      <v-spacer></v-spacer>
+      <v-divider class="mb-2"></v-divider>
 
-      <div v-if="!user">
-        <v-btn text class="mx-2" :to="{ name: 'login' }">Login</v-btn>
-      </div>
-      <div v-if="user">
-        <v-btn text class="mx-2" @click="logout">Logout</v-btn>
-      </div>
-    </v-app-bar>
+      <!-- Dashboard -->
+      <v-list-item :to="{ name: 'dashboard' }" exact link>
+        <v-list-item-icon>
+          <v-icon>mdi-view-dashboard</v-icon>
+        </v-list-item-icon>
 
-    <v-navigation-drawer v-if="user" app overflow dark expand-on-hover mini-variant :clipped="true">
-      <v-list dense nav class="py-0">
-        <app-avatar :user="user.user"></app-avatar>
+        <v-list-item-content>
+          <v-list-item-title>Dashboard</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
-        <v-divider class="mb-2"></v-divider>
+      <!-- Camera -->
+      <v-list-item :to="{ name: 'camera' }" exact link>
+        <v-list-item-icon>
+          <v-icon>mdi-camera</v-icon>
+        </v-list-item-icon>
 
-        <v-list-item v-for="item in navigator.items" :key="item.title" link :to="{ path: item.link }" exact>
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>Camera</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
+      <!-- Charts -->
+      <v-list-item :to="{ name: 'charts' }" exact link>
+        <v-list-item-icon>
+          <v-icon>mdi-chart-bar</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>Charts</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <!-- Manage -->
+      <v-list-group :color="$vuetify.theme.isDark ? 'white' : ''" no-action prepend-icon="mdi-cog" >
+        <template v-slot:activator>
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>Manage</v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item :to="{ name: 'users' }" exact link>
+          <v-list-item-content>
+            <v-list-item-title>Users</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </div>
+
+        <v-list-item :to="{ name: 'notifications' }" exact link>
+          <v-list-item-content>
+            <v-list-item-title>Notifications</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item :to="{ name: 'logs' }" exact link>
+          <v-list-item-content>
+            <v-list-item-title>Logs</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
+
+      <!-- Account -->
+      <v-list-item :to="{ name: 'account' }" exact link>
+        <v-list-item-icon>
+          <v-icon>mdi-account</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>Account</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
-import AppAvatar from '@/components/AppAvatar.vue';
+  import AppAvatar from '@/components/AppAvatar.vue';
 
-export default {
-  props: ['user', 'logout'],
-  components: {
-    AppAvatar,
-  },
-
-  data() {
-    return {
+  export default {
+    props: {
       navigator: {
-        items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard', link: 'dashboard' },
-          { title: 'Camera ', icon: 'mdi-flag', link: 'camera' },
-          { title: 'Charts', icon: 'mdi-camera', link: 'charts' },
-          { title: 'Manage', icon: 'mdi-help', link: 'manage' },
-        ],
+        type: Object,
       },
-    };
-  },
-};
+    },
+    components: {
+      AppAvatar,
+    },
+
+    data() {
+      return {
+        menu: false,
+      };
+    },
+  };
 </script>
+
+<style lang="scss">
+  .hover {
+    cursor: pointer;
+  }
+
+  .v-autocomplete {
+    min-width: 40vw;
+  }
+</style>
