@@ -11,20 +11,19 @@
 </template>
 
 <script>
-  /* eslint-disable */
-  export default {
-    name: 'AppBreadcrumbs',
-    watch: {
-      $route: function() {
-        this.breadcrumbList = this.$route.meta.breadcrumb;
-      },
+export default {
+  name: 'AppBreadcrumbs',
+  watch: {
+    $route: function() {
+      this.breadcrumbList = this.$route.meta.breadcrumb;
     },
-    data() {
-      return {
-        breadcrumbList: [],
-      };
-    },
-  };
+  },
+  data() {
+    return {
+      breadcrumbList: [],
+    };
+  },
+};
 </script>
 
 <style lang="scss">

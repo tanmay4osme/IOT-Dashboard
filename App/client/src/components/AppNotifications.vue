@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'AppNotifications',
-  };
+export default {
+  name: 'AppNotifications',
+};
 </script>

@@ -27,45 +27,44 @@
 </template>
 
 <script>
-  /* eslint-disable */
-  import { required, alpha_spaces } from "./Rules/index";
+import {required, alpha_spaces} from './Rules/index';
 
 export default {
-    props: ['creating', 'createNotification', 'showing'],
+  props: ['creating', 'createNotification', 'showing'],
 
-    data: () => ({
-      valid: false,
-      dialog: false,
-      types: ['success', 'info', 'warning', 'error'],
-      notification: {
-        text: '',
-        type: '',
-        status: true,
-      },
-    }),
+  data: () => ({
+    valid: false,
+    dialog: false,
+    types: ['success', 'info', 'warning', 'error'],
+    notification: {
+      text: '',
+      type: '',
+      status: true,
+    },
+  }),
 
-    watch: {
-      showing: {
-        immediate: true,
-        handler() {
-          this.dialog = this.showing;
-        },
+  watch: {
+    showing: {
+      immediate: true,
+      handler() {
+        this.dialog = this.showing;
       },
     },
+  },
 
-    methods: {
-      async onCreateNotification() {
-        if (this.valid) {
-          await this.createNotification(this.notification);
-          this.notification = {
-            text: '',
-            type: '',
-            status: true,
-          };
-        }
-      },
+  methods: {
+    async onCreateNotification() {
+      if (this.valid) {
+        await this.createNotification(this.notification);
+        this.notification = {
+          text: '',
+          type: '',
+          status: true,
+        };
+      }
     },
-  };
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

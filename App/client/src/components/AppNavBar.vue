@@ -81,24 +81,24 @@
 </template>
 
 <script>
-  import AppAvatar from '@/components/AppAvatar.vue';
+import AppAvatar from '@/components/AppAvatar.vue';
 
-  export default {
-    props: {
-      navigator: {
-        type: Object,
-      },
+export default {
+  props: {
+    navigator: {
+      type: Object,
     },
-    components: {
-      AppAvatar,
-    },
+  },
+  components: {
+    AppAvatar,
+  },
 
-    data() {
-      return {
-        menu: false,
-      };
-    },
-  };
+  data() {
+    return {
+      menu: false,
+    };
+  },
+};
 </script>
 
 <style lang="scss">

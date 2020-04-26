@@ -1,5 +1,4 @@
 // src/store/services/users.js
-/*eslint-disable */
 import feathersClient from '../../feathers-client';
 import feathersVuex from '../feathers/feathersVuex';
 

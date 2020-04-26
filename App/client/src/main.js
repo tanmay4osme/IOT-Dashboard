@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import {ValidationProvider, ValidationObserver} from 'vee-validate';
 import App from './App.vue';
 import router from './router';
 import store from './store';

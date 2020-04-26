@@ -97,52 +97,52 @@
 </template>
 
 <script>
-  import { mapActions, mapState } from 'vuex';
-  import { generateSnackbar } from '@/utils/index';
+import {mapActions, mapState} from 'vuex';
+import {generateSnackbar} from '@/utils/index';
 
-  export default {
-    data() {
-      return {
-        snackbar: {
-          show: false,
-          text: '',
-          color: 'success',
-          timeout: 6000,
-        },
-        valid: false,
-        editItem: {
-          role: '',
-          username: '',
-          displayName: '',
-          phone: '',
-          email: '',
-          password: '',
-        },
-      };
-    },
-    computed: {
-      ...mapState('auth', { user: 'user' }),
-    },
-    mounted() {
-      this.editItem = this.user;
-    },
-
-    methods: {
-      ...mapActions('users', ['update']),
-      async updateUser() {
-        if (this.valid) {
-          try {
-            /* eslint-disable-next-line */
-            await this.update([this.user.user._id, this.editItem]);
-            generateSnackbar(this.snackbar, 'success', 'User updated successfully !');
-          } catch (error) {
-            generateSnackbar(this.snackbar, 'error', error.message);
-          }
-        }
+export default {
+  data() {
+    return {
+      snackbar: {
+        show: false,
+        text: '',
+        color: 'success',
+        timeout: 6000,
       },
-      resetForm: () => window.location.reload(),
+      valid: false,
+      editItem: {
+        role: '',
+        username: '',
+        displayName: '',
+        phone: '',
+        email: '',
+        password: '',
+      },
+    };
+  },
+  computed: {
+    ...mapState('auth', {user: 'user'}),
+  },
+  mounted() {
+    this.editItem = this.user;
+  },
+
+  methods: {
+    ...mapActions('users', ['update']),
+    async updateUser() {
+      if (this.valid) {
+        try {
+          /* eslint-disable-next-line */
+            await this.update([this.user.user._id, this.editItem]);
+          generateSnackbar(this.snackbar, 'success', 'User updated successfully !');
+        } catch (error) {
+          generateSnackbar(this.snackbar, 'error', error.message);
+        }
+      }
     },
-  };
+    resetForm: () => window.location.reload(),
+  },
+};
 </script>
 
 <style lang="scss">
