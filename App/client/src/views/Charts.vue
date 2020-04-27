@@ -1,23 +1,39 @@
 <template>
+<div>
   <div>charts</div>
+   <div class="sub" v-html="buff">
+  </div>
+   <div class="publish">
+    <button @click="pub">Publish1 (Sub1 + Sub3)</button>
+  </div>
+  </div>
 </template>
 
 <script>
-import mqtt from 'mqtt';
-
-const client = mqtt.connect('mqtt://localhost:5000');
-
-client.on('connect', () => {
-  client.subscribe('presence', (err) => {
-    if (!err) {
-      console.log('subscibed');
-      client.publish('presence', '5');
-    }
-  });
-});
 
 export default {
+  /* eslint-disable*/
+  data() {
+    return {
+      buff: 'Sub1:<br>',
+    };
+  },
+  mqtt: {
+    'VueMqtt/presence': function (data) {
+     this.buff = this.buff + data + '<br>'
+    },
+  },
+  mounted() {
+    if (this.$mqtt.subscribe('VueMqtt/presence')) {
+      console.log('subscribed');
+    }
+  },
 
+  methods: {
+      pub() {
+      this.$mqtt.publish('VueMqtt/presence', '5');
+    },
+  },
 
 };
 </script>

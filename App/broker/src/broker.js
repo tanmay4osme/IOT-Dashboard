@@ -1,7 +1,6 @@
 const aedes = require("aedes")();
 const influx = require("./database/index.js");
 const server = require("net").createServer(aedes.handle);
-
 // write to database
 influx
   .getDatabaseNames()

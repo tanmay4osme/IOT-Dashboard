@@ -13,6 +13,7 @@
     "aedes": "^0.41.0",
     "dotenv": "^8.2.0",
     "influx": "^5.5.1",
-    "mqtt": "^3.0.0"
+    "mqtt": "^3.0.0",
+    "websocket-stream": "^5.5.2"
   }
 }

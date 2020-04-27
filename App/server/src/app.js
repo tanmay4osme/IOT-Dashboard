@@ -15,6 +15,10 @@ const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
 
+const api = require('./api');
+const light = require('./api/light');
+const amount = require('./api/amount');
+
 const authentication = require('./authentication');
 
 const mongoose = require('./mongoose');
@@ -45,6 +49,10 @@ app.configure(authentication);
 app.configure(services);
 // Set up event channels (see channels.js)
 app.configure(channels);
+
+app.use('/api/v1', api);
+app.use('/api/v1/light', light);
+app.use('/api/v1/amount', amount);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'index.html'));
