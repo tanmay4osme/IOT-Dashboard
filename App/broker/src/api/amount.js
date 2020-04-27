@@ -1,15 +1,16 @@
-const express = require('@feathersjs/express');
-const influx =  require('../database/influx/index');
+const express = require('express');
+
 const router = express.Router();
+const influx = require('../database/index');
 
 router.get('/', (req, res) => {
   influx
-    .query('select * from light')
+    .query('SELECT COUNT(*) from light ')
     .then((result) => {
       res.json(result);
     })
     .catch((err) => {
-      console.log('err', err);
+      console.log(err);
     });
 });
 

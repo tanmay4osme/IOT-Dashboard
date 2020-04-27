@@ -8,6 +8,7 @@ services:
       - /usr/app/node_modules
     ports:
       - '1883:3001'
+      - '24074:3002'
     depends_on:
       - 'influx'
     links:
