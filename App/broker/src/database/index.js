@@ -1,7 +1,7 @@
 const Influx = require("influx");
 
 const influx = new Influx.InfluxDB({
-  host: "db",
+  host: "influx",
   database: "logs",
   port: process.env.DB_PORT || 8086,
   schema: [
