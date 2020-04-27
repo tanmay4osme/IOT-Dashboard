@@ -21,7 +21,18 @@ influx
   aedes.on("publish", (packet, client, message) => {
     if (packet.cmd === "publish") {
       console.log(`Packet is : ${packet} and message : ${packet.payload}`);
-      //write to db
+      
+      // Write to db
+      influx.writePoints([
+        {
+          measurement: 'light',
+          fields: { light: packet.payload },
+          tags: { host: 'localhost' },
+        }
+      ])
+      .catch((error) => {
+        console.log(`Error saving data to InfluxDB! ${error}`)
+      })
     }
   });
 

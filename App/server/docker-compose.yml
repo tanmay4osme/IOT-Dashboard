@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-  db:
+  mongo:
     image: mongo
     restart: always
     volumes:
@@ -11,3 +11,12 @@ services:
       MONGO_DB: ${MONGO_DB}
     ports:
       - 27017:27017
+
+  influx:
+    container_name: influxdb
+    image: influxdb:latest
+    volumes:
+      - ./data:/data/db
+    ports:
+      - '8086:8086'
+    

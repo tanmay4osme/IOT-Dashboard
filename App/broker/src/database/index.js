@@ -6,9 +6,9 @@ const influx = new Influx.InfluxDB({
   port: process.env.DB_PORT || 8086,
   schema: [
     {
-      measurement: "temperatures",
+      measurement: "light",
       fields: {
-        temperature: Influx.FieldType.INTEGER
+        light: Influx.FieldType.INTEGER
       },
       tags: ["host"]
     }
