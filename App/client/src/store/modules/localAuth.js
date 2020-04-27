@@ -14,9 +14,6 @@ const actions = {
       )
         .then(async () => {
           router.push('/dashboard');
-        })
-        .catch((e) => {
-          console.log(e);
         });
     }
   },
