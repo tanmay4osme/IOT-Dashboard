@@ -4,8 +4,8 @@ services:
     build: .
     restart: always
     volumes:
-      - ./src:/usr/app/
-      - /usr/app/node_modules
+      - .:/usr/brk/
+      - /usr/brk/node_modules
     ports:
       - '1883:3001'
       - '24074:3002'
