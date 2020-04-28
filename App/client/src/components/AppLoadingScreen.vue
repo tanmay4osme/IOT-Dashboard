@@ -6,15 +6,15 @@
 </template>
 
 <script>
-  export default {
-    name: 'AppLoadingScreen',
-    props: {
-      isLoading: {
-        type: Boolean,
-        default: true,
-      },
+export default {
+  name: 'AppLoadingScreen',
+  props: {
+    isLoading: {
+      type: Boolean,
+      default: true,
     },
-  };
+  },
+};
 </script>
 
 <style scoped>

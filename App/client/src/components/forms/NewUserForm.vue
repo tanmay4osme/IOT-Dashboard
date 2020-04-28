@@ -1,5 +1,4 @@
 <template>
-  <!-- eslint-disable -->
   <v-row justify="center">
     <v-dialog max-width="500" persistent v-model="dialog">
       <v-card>
@@ -54,46 +53,45 @@
 </template>
 
 <script>
-  /* eslint-disable */
-  import { required, min,max, alpha_num, email } from "./Rules/index";
-  export default {
-    name: 'NewUserForm',
-    props: ['creating', 'createUser', 'showing'],
-    data() {
-      return {
+import {required, min, max, alpha_num, email} from './Rules/index';
+export default {
+  name: 'NewUserForm',
+  props: ['creating', 'createUser', 'showing'],
+  data() {
+    return {
 
-        valid: false,
-        dialog: false,
-        confirmation: '',
+      valid: false,
+      dialog: false,
+      confirmation: '',
 
-        roleItems: ['Administrator', 'Member'],
-        user: {
-          username: '',
-          password: '',
-          displayName: '',
-          imageUrl: '',
-          role: '',
-          email: '',
-          phone: '',
-        },
-      };
-    },
-    watch: {
-      showing: {
-        immediate: true,
-        handler() {
-          this.dialog = this.showing;
-        },
+      roleItems: ['Administrator', 'Member'],
+      user: {
+        username: '',
+        password: '',
+        displayName: '',
+        imageUrl: '',
+        role: '',
+        email: '',
+        phone: '',
+      },
+    };
+  },
+  watch: {
+    showing: {
+      immediate: true,
+      handler() {
+        this.dialog = this.showing;
       },
     },
-    methods: {
-      async onCreateUser() {
-        const isValid = await this.$refs.observer.validate();
-        if (isValid) {
-          await this.createUser(this.user);
-          this.$refs.observer.reset();
-        }
-      },
+  },
+  methods: {
+    async onCreateUser() {
+      const isValid = await this.$refs.observer.validate();
+      if (isValid) {
+        await this.createUser(this.user);
+        this.$refs.observer.reset();
+      }
     },
-  };
+  },
+};
 </script>

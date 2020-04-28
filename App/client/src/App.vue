@@ -21,46 +21,46 @@
 </template>
 
 <script>
-  import { mapActions, mapState } from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
-  import AppNavBar from '@/components/AppNavBar.vue';
-  import AppToolBar from '@/components/toolbar/AppToolBar.vue';
-  import AppBreadcrumbs from '@/components/toolbar/AppBreadcrumbs.vue';
-  import AppNotifications from '@/components/AppNotifications.vue';
-  import SplashScreen from '@/views/SplashScreen.vue';
+import AppNavBar from '@/components/AppNavBar.vue';
+import AppToolBar from '@/components/toolbar/AppToolBar.vue';
+import AppBreadcrumbs from '@/components/toolbar/AppBreadcrumbs.vue';
+import AppNotifications from '@/components/AppNotifications.vue';
+import SplashScreen from '@/views/SplashScreen.vue';
 
-  export default {
-    components: {
-      AppNotifications,
-      AppNavBar,
-      AppToolBar,
-      AppBreadcrumbs,
-      SplashScreen,
+export default {
+  components: {
+    AppNotifications,
+    AppNavBar,
+    AppToolBar,
+    AppBreadcrumbs,
+    SplashScreen,
+  },
+  data: () => ({
+    navigator: {
+      show: false,
     },
-    data: () => ({
-      navigator: {
-        show: false,
-      },
-      loading: true,
-    }),
+    loading: true,
+  }),
 
-    computed: {
-      ...mapState('auth', { user: 'user' }),
+  computed: {
+    ...mapState('auth', {user: 'user'}),
+  },
+  mounted() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
+  },
+  methods: {
+    ...mapActions('auth', {authLogout: 'logout'}),
+    logout() {
+      this.authLogout().then(() => {
+        this.$router.push('/login');
+      });
     },
-    mounted() {
-      setTimeout(() => {
-        this.loading = false;
-      }, 3000);
-    },
-    methods: {
-      ...mapActions('auth', { authLogout: 'logout' }),
-      logout() {
-        this.authLogout().then(() => {
-          this.$router.push('/login');
-        });
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style lang="scss">

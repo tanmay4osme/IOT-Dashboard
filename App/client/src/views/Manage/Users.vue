@@ -50,69 +50,68 @@
   </v-container>
 </template>
 
-<!-- eslint-disable-->
 <script>
-  import NewUserForm from '@/components/forms/NewUserForm';
-  import { mapActions, mapGetters, mapState } from 'vuex';
-  import { generateSnackbar } from '@/utils/index';
+import NewUserForm from '@/components/forms/NewUserForm';
+import {mapActions, mapGetters, mapState} from 'vuex';
+import {generateSnackbar} from '@/utils/index';
 
-  export default {
-    name: 'User-overview',
-    components: {
-      NewUserForm,
-    },
-    data() {
-      return {
-        createUserDialog: false,
-        snackbar: {
-          show: false,
-          text: '',
-          color: 'success',
-          timeout: 6000,
-        },
-      };
-    },
-    computed: {
-      ...mapState('auth', { userIsCreating: 'isCreatePending' }),
-      ...mapGetters('users', { findUsersInStore: 'find' }),
-      query() {
-        return {};
+export default {
+  name: 'User-overview',
+  components: {
+    NewUserForm,
+  },
+  data() {
+    return {
+      createUserDialog: false,
+      snackbar: {
+        show: false,
+        text: '',
+        color: 'success',
+        timeout: 6000,
       },
-      users() {
-        return this.findUsersInStore({ query: this.query }).data;
-      },
+    };
+  },
+  computed: {
+    ...mapState('auth', {userIsCreating: 'isCreatePending'}),
+    ...mapGetters('users', {findUsersInStore: 'find'}),
+    query() {
+      return {};
     },
-    methods: {
-      ...mapActions('users', { findUsers: 'find' }),
-      async createUser(user) {
-        const { User } = this.$FeathersVuex.api;
-        const newUser = new User(user);
+    users() {
+      return this.findUsersInStore({query: this.query}).data;
+    },
+  },
+  methods: {
+    ...mapActions('users', {findUsers: 'find'}),
+    async createUser(user) {
+      const {User} = this.$FeathersVuex.api;
+      const newUser = new User(user);
+      try {
+        await newUser.save();
+        // this.generateLogEntry(`${this.user.user.username} added ${newUser.username} to the system.`);
+        generateSnackbar(this.snackbar, 'success', 'User created successfully !');
+      } catch (error) {
+        generateSnackbar(this.snackbar, 'error', error);
+      }
+    },
+
+    async deleteUser(id) {
+      const choice = window.confirm('Are you sure you want to delete this item?');
+      if (choice === true) {
+        const {User} = this.$FeathersVuex.api;
+
         try {
-          await newUser.save();
-          //this.generateLogEntry(`${this.user.user.username} added ${newUser.username} to the system.`);
-          generateSnackbar(this.snackbar, 'success', 'User created successfully !');
+          const user = await User.get(id);
+          await user.remove();
+          generateSnackbar(this.snackbar, 'success', 'User deleted successfully !');
         } catch (error) {
           generateSnackbar(this.snackbar, 'error', error);
         }
-      },
-
-      async deleteUser(id) {
-        const choice = window.confirm('Are you sure you want to delete this item?');
-        if (choice === true) {
-          const { User } = this.$FeathersVuex.api;
-
-          try {
-            const user = await User.get(id);
-            await user.remove();
-            generateSnackbar(this.snackbar, 'success', 'User deleted successfully !');
-          } catch (error) {
-            generateSnackbar(this.snackbar, 'error', error);
-          }
-        }
-      },
+      }
     },
-    created() {
-      this.findUsers({ query: this.query });
-    },
-  };
+  },
+  created() {
+    this.findUsers({query: this.query});
+  },
+};
 </script>
