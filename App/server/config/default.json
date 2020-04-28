@@ -1,7 +1,7 @@
 {
   "host": "localhost",
-  "port": 3030,
-  "public": "../public/",
+  "port": 3000,
+  "public": "../src/public/",
   "paginate": {
     "default": 10,
     "max": 50
@@ -25,5 +25,5 @@
       "passwordField": "password"
     }
   },
-  "mongodb": "mongodb://localhost:27017/server"
+  "mongodb": "mongodb://mongo/server"
 }

@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["Camera"],{"6ec0":function(e,r,t){"use strict";t.r(r);var l=function(){var e=this,r=e.$createElement,t=e._self._c||r;return t("iframe",{attrs:{width:"1280",height:"720",src:"http://192.168.0.17:8080",frameborder:"0",allow:"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",allowfullscreen:"allowfullscreen"}})},a=[],c=t("2877"),n={},o=Object(c["a"])(n,l,a,!1,null,null,null);r["default"]=o.exports}}]);
+//# sourceMappingURL=Camera.8098b457.js.map

@@ -43,40 +43,40 @@
 </template>
 
 <script>
-  import { FeathersVuexFind } from 'feathers-vuex';
-  import { logTable } from '@/utils/tableConfigs';
-  import axios from 'axios';
+import {FeathersVuexFind} from 'feathers-vuex';
+import {logTable} from '@/utils/tableConfigs';
+import axios from 'axios';
 
-  export default {
-    data() {
-      return {
-        logTable,
-      };
-    },
-    components: {
-      FeathersVuexFind,
-    },
+export default {
+  data() {
+    return {
+      logTable,
+    };
+  },
+  components: {
+    FeathersVuexFind,
+  },
 
-    methods: {
-      downloadServerLog() {
-        axios({
-          url: 'http://localhost:3030/logs/download',
-          method: 'GET',
-          responseType: 'http://localhost:8080', // important
-        }).then((response) => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute('download', 'logging.log');
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
-          window.URL.revokeObjectURL(url);
-        });
-      },
-      downloadActionLog() {
-      },
+  methods: {
+    downloadServerLog() {
+      axios({
+        url: 'http://localhost:3030/logs/download',
+        method: 'GET',
+        responseType: 'http://localhost:8080', // important
+      }).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'logging.log');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
+      });
     },
-  };
+    downloadActionLog() {
+    },
+  },
+};
 </script>
 <style lang="scss" scoped></style>

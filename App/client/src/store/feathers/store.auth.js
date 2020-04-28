@@ -1,5 +1,5 @@
 import feathersVuex from './feathersVuex';
 
-const { makeAuthPlugin } = feathersVuex;
+const {makeAuthPlugin} = feathersVuex;
 
-export default makeAuthPlugin({ userService: 'users' });
+export default makeAuthPlugin({userService: 'users'});
