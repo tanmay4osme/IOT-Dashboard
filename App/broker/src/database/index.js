@@ -1,5 +1,21 @@
 const Influx = require("influx");
 
+const dataDB = new Influx.InfluxDB({
+  host: "influx",
+  database: "data",
+  port: process.env.DB_PORT || 8086,
+  schema: [
+    {
+      measurement: "temperature",
+      fields: {
+        temperature: Influx.FieldType.INTEGER
+      },
+      tags: ["host"]
+    }
+  ]
+})
+
+
 const influx = new Influx.InfluxDB({
   host: "influx",
   database: "logs",
@@ -15,4 +31,7 @@ const influx = new Influx.InfluxDB({
   ]
 })
 
-module.exports = influx;
+module.exports = {
+  dataDB,
+  influx
+};

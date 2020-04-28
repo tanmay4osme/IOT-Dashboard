@@ -1,16 +1,16 @@
 const express = require('express');
 
 const router = express.Router();
-const { influx } = require('../database/index');
+const { dataDB }  = require('../../database/index');
 
 router.get('/', (req, res) => {
-  influx
-    .query('SELECT COUNT(*) from light ')
+  dataDB
+    .query('select * from temperatures')
     .then((result) => {
       res.json(result);
     })
     .catch((err) => {
-      console.log(err);
+      console.log('err', err);
     });
 });
 

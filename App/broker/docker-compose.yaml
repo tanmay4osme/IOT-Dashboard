@@ -7,8 +7,9 @@ services:
       - .:/usr/brk/
       - /usr/brk/node_modules
     ports:
-      - '1883:3001'
+      - '24071:3001'
       - '24074:3002'
+      - '24075:3003'
     depends_on:
       - 'influx'
     links:

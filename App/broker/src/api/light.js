@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const influx = require('../database/index');
+const { influx } = require('../database/index');
 
 router.get('/', (req, res) => {
   influx
