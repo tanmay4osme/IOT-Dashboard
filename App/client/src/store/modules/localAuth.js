@@ -12,12 +12,9 @@ const actions = {
           },
           {root: true},
       )
-          .then(async () => {
-            router.push('/dashboard');
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+        .then(async () => {
+          router.push('/dashboard');
+        });
     }
   },
 };

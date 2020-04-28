@@ -1,13 +1,34 @@
 version: '3.1'
 services:
-  db:
+  server:
+    container_name: api-server
+    build: .
+    restart: always
+    volumes:
+      - .:/usr/srv/
+      - /usr/srv/node_modules
+    ports:
+      - '80:3000'
+    depends_on:
+      - 'mongo'
+    links:
+      - mongo
+    environment:
+      WAIT_HOSTS: mongo:27017
+
+  mongo:
+    container_name: api-db
     image: mongo
     restart: always
     volumes:
-      - ./docker-data/db-data:/data/db
+      - mongodb:/data/db
     environment:
       MONGO_PASSWORD: ${MONGO_PASSWORD}
       MONGO_USER: ${MONGO_USER}
       MONGO_DB: ${MONGO_DB}
     ports:
       - 27017:27017
+volumes: 
+  mongodb:
+
+

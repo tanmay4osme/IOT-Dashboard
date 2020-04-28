@@ -127,16 +127,18 @@ export default {
     this.editItem = this.user;
   },
 
-  methods: {
-    ...mapActions('users', ['update']),
-    async updateUser() {
-      if (this.valid) {
-        try {
-          /* eslint-disable-next-line */
-            await this.update([this.user.user._id, this.editItem]);
-          generateSnackbar(this.snackbar, 'success', 'User updated successfully !');
-        } catch (error) {
-          generateSnackbar(this.snackbar, 'error', error.message);
+    methods: {
+      ...mapActions('users', ['update']),
+      async updateUser() {
+        if (this.valid) {
+          try {
+            /* eslint-disable-next-line */
+            await this.update([this.user._id, this.editItem]);
+            generateSnackbar(this.snackbar, 'success', 'User updated successfully !');
+             window.location.reload();
+          } catch (error) {
+            generateSnackbar(this.snackbar, 'error', error.message);
+          }
         }
       }
     },
