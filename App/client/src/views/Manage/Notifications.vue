@@ -76,12 +76,12 @@
 </template>
 
 <script>
-  import { mapActions, mapState } from 'vuex';
-  import { FeathersVuexFind } from 'feathers-vuex';
-  import NewNotificationForm from '@/components/forms/NewNotificationForm.vue';
-  import { notificationTable } from '@/utils/tableConfigs';
+import {mapActions, mapState} from 'vuex';
+import {FeathersVuexFind} from 'feathers-vuex';
+import NewNotificationForm from '@/components/forms/NewNotificationForm.vue';
+import {notificationTable} from '@/utils/tableConfigs';
 
-  /* eslint-disable */
+/* eslint-disable */
   export default {
     components: {
       FeathersVuexFind,

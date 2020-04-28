@@ -64,37 +64,36 @@
 </template>
 
 <script>
-  /* eslint-disable */
-  import { mdiWhiteBalanceSunny } from '@mdi/js';
+import {mdiWhiteBalanceSunny} from '@mdi/js';
 
-  export default {
-    props: {
-      logout: {
-        type: Function,
-      },
-      navigator: {
-        type: Object,
-      },
+export default {
+  props: {
+    logout: {
+      type: Function,
     },
-    data: () => ({
-      menu: false,
-      dark: false,
-      mdiWhiteBalanceSunny,
-    }),
+    navigator: {
+      type: Object,
+    },
+  },
+  data: () => ({
+    menu: false,
+    dark: false,
+    mdiWhiteBalanceSunny,
+  }),
 
-    watch: {
-      '$vuetify.theme.isDark': {
-        handler: function() {
-          //this.$vuetify.theme.isDark
-          //update user
-        },
-        immediate: true,
+  watch: {
+    '$vuetify.theme.isDark': {
+      handler: function() {
+        // this.$vuetify.theme.isDark
+        // update user
       },
+      immediate: true,
     },
-    methods: {
-      toggleDarkMode() {
-        this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-      },
+  },
+  methods: {
+    toggleDarkMode() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     },
-  };
+  },
+};
 </script>
