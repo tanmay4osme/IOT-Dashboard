@@ -6,7 +6,9 @@ client.on('connect', () => {
   
   client.subscribe('presence', (err) => {
     if (!err) {
-      client.publish('presence', '5')
+      setInterval(() => {
+        client.publish('presence', Math.floor(Math.random() * 1001).toString())
+      }, 2000);
     }
   })
 })
