@@ -200,6 +200,15 @@ To build the vue app for production : https://github.com/nklayman/vue-cli-plugin
 - Documentation
   - https://www.electronjs.org/docs
 
+### 4.9 JSON to CSV
+
+VueJS component to export Json Data into CSV file and download the resulting file.
+
+- Documentation 
+  - github.com/Belphemur/vue-json-csv#readme
+  - https://www.npmjs.com/package/vue-json-csv
+
+
 ## 5. Common
 
 ### 5.1 - ESLint
@@ -242,3 +251,12 @@ Automated dependency updates with pull requests
 ### 5.6 - KANBAN bord
 
 https://agilescrumgroup.nl/wat-is-kanban-methode/
+
+
+### 5.7 DOTENV
+
+Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env. Storing configuration in the environment separate from code is based on The Twelve-Factor App methodology.
+
+- Documentation
+  - https://www.npmjs.com/package/dotenv
+  - https://github.com/motdotla/dotenv#readme
