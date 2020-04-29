@@ -143,8 +143,7 @@ export default {
       }
     },
     resetForm: () => window.location.reload(),
-  },
-};
+  };
 </script>
 
 <style lang="scss">

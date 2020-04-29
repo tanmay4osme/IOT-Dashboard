@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <v-btn @click="allow = ! allow"> enable requests</v-btn>
+    <v-btn @click="allow = !allow">enable requests</v-btn>
+    <download-csv type="button" class="v-btn v-btn--contained theme--light v-size--default" :data="response" name="filename.csv">
+      Download CSV
+    </download-csv>
     <v-row justify="center">
       <v-col cols="10">
         <canvas id="lineChart" height="300" width="0"></canvas>
@@ -20,6 +23,7 @@ export default {
       allow: false,
       chart: null,
       light: [],
+      response: []
     };
   },
 
@@ -34,14 +38,14 @@ export default {
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ["Light"],
+        labels: ['Light'],
         datasets: [
-        {
-          label: "Light intensity (H)",
-          backgroundColor: ["#3e95cd"],
-          data: this.light
-        }
-      ]
+          {
+            label: 'Light intensity (H)',
+            backgroundColor: ['#3e95cd'],
+            data: this.light,
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -75,18 +79,19 @@ export default {
     addData(chart, label, data) {
       chart.data.labels.push(label);
       chart.data.datasets.forEach((dataset) => {
-          dataset.data.push(data);
+        dataset.data.push(data);
       });
       chart.update();
     },
 
-     removeData(chart) {
-          chart.data.splice(-1,10)
-          chart.update();
-      },
+    removeData(chart) {
+      chart.data.splice(-1, 10);
+      chart.update();
+    },
     async getData() {
       const response = await axios.get('http://intelliflow.pxl-ea-ict.be:24074/api/v1/light');
-      //this.light.push(response.data[response.data.length - 1].light);
+      console.log(response.data);
+      this.response = response.data;
       this.addData(this.chart, response.data[response.data.length - 1].time, response.data[response.data.length - 1].light);
     },
   },
