@@ -75,13 +75,6 @@ export default {
     //background-color: rgb(39, 39, 39) !important;
   }
 
-  .v-breadcrumbs__divider {
-    //color: white !important;
-  }
-
-  .v-breadcrumbs__item {
-    //color: white !important;
-  }
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }
