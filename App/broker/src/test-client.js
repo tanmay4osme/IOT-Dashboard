@@ -1,5 +1,5 @@
 const mqtt = require('mqtt');
-const client  = mqtt.connect('mqtt://intelliflow.pxl-ea-ict.be:24071');
+const client  = mqtt.connect('mqtt://localhost:1883');
  
 client.on('connect', () => {
   console.log("connected");
@@ -8,7 +8,9 @@ client.on('connect', () => {
     if (!err) {
       setInterval(() => {
         client.publish('presence', Math.floor(Math.random() * 1001).toString())
-      }, 2000);
+        console.log("send");
+        
+      }, 1);
     }
   })
 })

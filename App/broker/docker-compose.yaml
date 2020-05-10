@@ -1,5 +1,13 @@
 version: '3'
 services:
+  influx:
+    container_name: influxdb
+    image: influxdb:latest
+    volumes:
+      - ./data:/data/db
+    ports:
+      - '8086:8086'
+
   broker:
     build: .
     restart: always
@@ -20,10 +28,38 @@ services:
     environment:
       WAIT_HOSTS: influx:8086
 
-  influx:
-    container_name: influxdb
-    image: influxdb:latest
+  # Define a Telegraf service
+  telegraf:
+    restart: always
+    image: telegraf
+    links:
+      - influx
     volumes:
-      - ./data:/data/db
+      - ./etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     ports:
-      - '8086:8086'
+      - "8092:8092/udp"
+      - "8094:8094"
+      - "8125:8125/udp"
+  # Define a Chronograf service
+  chronograf:
+    image: chronograf
+    volumes:
+      - ./data/chronograf:/var/lib/chronograf
+    ports:
+      - "8888:8888"
+    links:
+      - influx
+  # Define a Kapacitor service
+  kapacitor:
+    image: kapacitor
+    environment:
+      KAPACITOR_HOSTNAME: kapacitor
+      KAPACITOR_INFLUXDB_0_URLS_0: http://influx:8086
+    volumes:
+      - ./data/kapacitor:/var/lib/kapacitor
+    links:
+      - influx
+    ports:
+      - "9092:9092"
+
+

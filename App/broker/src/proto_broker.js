@@ -20,11 +20,13 @@ aedes.on('publish', (packet, client, message) => {
             tags: { host: 'localhost' },
           },
         ])
-        .catch((error) => {
-          console.error(`Error saving data to InfluxDB! ${err.stack}`);
+        .catch((err) => {
+          console.error(`Error saving data to InfluxDB! ${err}`);
         });
     });
   }
 });
 
 module.exports = protosrv;
+
+
