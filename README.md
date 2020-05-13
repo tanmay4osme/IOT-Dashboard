@@ -187,7 +187,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 - **Kasper Toetenel** - _CONTRIBUTOR_ - [Kasper Toetenel](https://github.com/SheldonPi1999)
 - **Wesley Vrancken** - _CONTRIBUTOR_ - [Wesley Vranken](https://github.com/wesvr)
 - **Emile Knaepen** - _CONTRIBUTOR_ - [Emile Knaepen](https://github.com/eknaepen)
-- **Bart Stukken** - _TEACHER_ - [Bart Stukken](https://github.com/Bart-PXL)
+- **Bart Stukken** - _PRODUCT_OWNER_ - [Bart Stukken](https://github.com/Bart-PXL)
 
 ## Questions
 
