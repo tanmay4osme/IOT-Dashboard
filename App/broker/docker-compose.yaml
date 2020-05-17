@@ -37,9 +37,9 @@ services:
     volumes:
       - ./etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     ports:
-      - "8092:8092/udp"
-      - "8094:8094"
-      - "8125:8125/udp"
+      - "24078:8092/udp"
+      - "24079:8094"
+      - "24080:8125/udp"
   # Define a Chronograf service
   chronograf:
     image: chronograf
