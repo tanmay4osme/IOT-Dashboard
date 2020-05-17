@@ -1,11 +1,17 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
+const dataDB  = require('../database/index');
 
-router.get("/", (req, res) => {
-  res.json({
-    message: "API - 👋🌎🌍🌏"
-  });
+router.get('/', (req, res) => {
+  dataDB
+    .query('select * from test')
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log('err', err);
+    });
 });
 
 module.exports = router;

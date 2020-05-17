@@ -1,13 +1,13 @@
 const aedes = require("aedes")();
-const { influx } = require("./database/index.js");
+const dataDB = require("./database/index.js");
 const server = require("net").createServer(aedes.handle);
 
 aedes.on("publish", (packet, client, message) => {
   if (packet.cmd === "publish") {
-    influx.writePoints([
+    dataDB.writePoints([
       {
-        measurement: 'light',
-        fields: { light: packet.payload },
+        measurement: 'test',
+        fields: { test: packet.payload },
         tags: { host: 'localhost' },
       }
     ])

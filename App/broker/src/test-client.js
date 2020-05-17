@@ -9,7 +9,6 @@ client.on('connect', () => {
       setInterval(() => {
         client.publish('presence', Math.floor(Math.random() * 1001).toString())
         console.log("send");
-        
       }, 1);
     }
   })

@@ -46,7 +46,7 @@ services:
     volumes:
       - ./data/chronograf:/var/lib/chronograf
     ports:
-      - "8888:8888"
+      - "8080:8888"
     links:
       - influx
   # Define a Kapacitor service

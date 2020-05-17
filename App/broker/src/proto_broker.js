@@ -1,5 +1,5 @@
 const aedes = require("aedes")();
-const { dataDB } = require("./database/index.js");
+const dataDB = require("./database/index.js");
 const protosrv = require("net").createServer(aedes.handle);
 const protobuf = require('protobufjs');
 
