@@ -3,3 +3,5 @@ https://www.npmjs.com/package/dotenv
 https://github.com/node-influx/node-influx
 
 npm install --save influx
+
+//PxlIOT-20192020
