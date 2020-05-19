@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/JensVanhulst/IOT-Dashboard" target="_blank" rel="noopener noreferrer">
-    <img width="100" src="/App/client/public/favicon.ico" alt="IOT dashboard">
+    <img width="200" src="https://cdn.pixabay.com/photo/2018/04/21/02/11/iot-3337536_960_720.png" alt="IOT dashboard">
   </a>
 </p>
 
@@ -32,14 +32,15 @@
   <a href="#">
     <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/JensVanhulst/IOT-Dashboard?style=for-the-badge" alt="Language">
   </a>
-
 </p>
 
----
 
 # IOT-Dashboard
 
-One Paragraph of project description goes here
+This project is a experimental IOT-Dashboard by which you can manage realtime data and display this data onto graphs. 
+This dashboard also provides user authentication/roles, where the owner can manage the accounts and create new ones.
+
+The dashboard also provides certain predictions about the sensor data, which indicates if something is about to happen. (tbd) 
 
 ---
 
@@ -57,7 +58,6 @@ One Paragraph of project description goes here
     - [Build application (client)](#build-application-client)
     - [Build application (server)](#build-application-server)
   - [Installation for production](#installation-for-production)
-  - [Features](#features)
   - [Documentation](#documentation)
   - [Versioning](#versioning)
   - [People](#people)
@@ -69,9 +69,29 @@ One Paragraph of project description goes here
 
 ## Getting Started
 
-To get started follow the instructions below to install the code or install a release version.
+To get started follow the instructions below to work on the project or download the latest release.
 
 ## Installation & setup
+If you want to contribute to this project, 
+make sure you have the following tools installed on your system.
+
+> Required tools
+
+| Software name  | Version  | Link                         |
+|----------------|----------| ---------------------------- |
+| Node.js        | v12.16.2 | https://nodejs.org/          |
+| MongoDB        | v4.2     | https://www.mongodb.com/     |
+| Git            | @latest  | https://git-scm.com/         |  
+| InfluxDB       | v1.8     | https://www.influxdata.com/  | 
+| Feathers       | v4.5.3   | https://docs.feathersjs.com/ |
+
+> Recommended tools
+
+| Software name      | Version | Link                               |
+|--------------------|---------| ---------------------------------- |
+| Visual Studio Code | @latest | https://visualstudio.microsoft.com |
+| Postman            | @latest | https://www.postman.com/           |
+| GitHub Desktop     | @latest | https://desktop.github.com/        |
 
 ## Installation for development
 
@@ -136,10 +156,10 @@ $ npm run build
 
 ### Build application (server)
 
-Make a directory on the server ...
+Make a directory on the server. 
 
 1. Make sure the following software is installed on the server
-   - Node LTS
+   - Node (v12.6.1)
    - Docker & docker-compose
 2. Run the following commands
 
@@ -171,8 +191,6 @@ $ docker exec -it <container name> /bin/bash
   - Go to [Releases](https://github.com/JensVanhulst/IOT-Dashboard/releases) and pick your operating system package
 - Go to website : `http://193.190.154.184:24070/` or `http://intelliflow.pxl-ea-ict.be:24070/`
 
-## Features
-
 ## Documentation
 
 To check out the docs, visit [Documentation](https://vanhulstjens.gitbook.io/iot-dashboard/).
@@ -187,16 +205,16 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 - **Kasper Toetenel** - _CONTRIBUTOR_ - [Kasper Toetenel](https://github.com/SheldonPi1999)
 - **Wesley Vrancken** - _CONTRIBUTOR_ - [Wesley Vranken](https://github.com/wesvr)
 - **Emile Knaepen** - _CONTRIBUTOR_ - [Emile Knaepen](https://github.com/eknaepen)
-- **Bart Stukken** - _TEACHER_ - [Bart Stukken](https://github.com/Bart-PXL)
+- **Bart Stukken** - _SCRUM-MASTER_ - [Bart Stukken](https://github.com/Bart-PXL)
+- **Koen Gilissen** - _PRODUCT-OWNER_ - [Koen Gilissen](https://github.com/koen-gilissen)
 
 ## Questions
 
-For questions and support please use the email address: jens.vanhulst@student.pxl.be.
-The issue list of this repo is **exclusively** for bug reports and feature requests.
+For questions and support please submit an issue.
 
 ## Issues
 
-Please make sure to read the [Issue Reporting Checklist]() before opening an issue. Issues not conforming to the guidelines may be closed immediately.
+To create a new issue please follow the issue templates provided.
 
 ## License
 
