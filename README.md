@@ -208,6 +208,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 - **Bart Stukken** - _SCRUM-MASTER_ - [Bart Stukken](https://github.com/Bart-PXL)
 - **Koen Gilissen** - _PRODUCT-OWNER_ - [Koen Gilissen](https://github.com/koen-gilissen)
 
+ <img width="200" src="https://www.pxl.be/Assets/website/pxl_algemeen/afbeeldingen/grotere_versie/logo_PXL_University%20of%20applied%20sciences%20and%20arts.png" alt="IOT dashboard">
+
 ## Questions
 
 For questions and support please submit an issue.
