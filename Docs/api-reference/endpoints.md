@@ -1,5 +1,7 @@
 # Endpoints
 
+
+
 {% api-method method="post" host="http://localhost:3000" path="/users" %}
 {% api-method-summary %}
 Create a user 
