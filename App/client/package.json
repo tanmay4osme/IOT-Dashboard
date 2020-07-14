@@ -14,7 +14,7 @@
   },
   "main": "background.js",
   "dependencies": {
-    "@feathersjs/authentication-client": "^4.5.3",
+    "@feathersjs/authentication-client": "^4.5.6",
     "@feathersjs/feathers": "^4.5.3",
     "@feathersjs/rest-client": "^4.5.3",
     "@feathersjs/socketio-client": "^4.5.3",
